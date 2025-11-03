@@ -1,0 +1,5 @@
+# .htaccess (colocar en la raíz o en public según preferencia)
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ public/index.php [QSA,L]

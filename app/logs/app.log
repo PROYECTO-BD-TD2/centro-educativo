@@ -1,0 +1,171 @@
+[2025-11-02 03:32:27][INFO] Ruta registrada: [GET] /alumnos → AlumnosController@index
+[2025-11-02 03:32:27][INFO] Ruta registrada: [GET] /alumnos/(\d+) → AlumnosController@show
+[2025-11-02 03:32:27][INFO] Ruta registrada: [POST] /alumnos → AlumnosController@store
+[2025-11-02 03:32:27][INFO] Ruta registrada: [PUT] /alumnos/(\d+) → AlumnosController@update
+[2025-11-02 03:32:27][INFO] Ruta registrada: [DELETE] /alumnos/(\d+) → AlumnosController@delete
+[2025-11-02 03:32:27][INFO] Ruta registrada: [GET] /alumnos/buscar → AlumnosController@buscar
+[2025-11-02 03:32:27][INFO] Ruta registrada: [GET] /profesores → ProfesoresController@index
+[2025-11-02 03:32:27][INFO] Ruta registrada: [GET] /profesores/(\d+) → ProfesoresController@show
+[2025-11-02 03:32:27][INFO] Ruta registrada: [POST] /profesores → ProfesoresController@store
+[2025-11-02 03:32:27][INFO] Ruta registrada: [GET] /cursos → CursosController@index
+[2025-11-02 03:32:27][INFO] Ruta registrada: [GET] /cursos/(\d+) → CursosController@show
+[2025-11-02 03:32:27][INFO] Ruta registrada: [POST] /cursos → CursosController@store
+[2025-11-02 03:32:27][INFO] Ruta registrada: [GET] /inscripciones → InscripcionesController@index
+[2025-11-02 03:32:27][INFO] Ruta registrada: [POST] /inscripciones → InscripcionesController@store
+[2025-11-02 03:32:27][INFO] Ruta registrada: [GET] /calificaciones → CalificacionesController@index
+[2025-11-02 03:32:27][INFO] Ruta registrada: [POST] /calificaciones → CalificacionesController@store
+[2025-11-02 03:32:27][INFO] Solicitud entrante: [GET] /alumnos/buscar
+[2025-11-02 03:32:27][INFO] Coincidencia encontrada → Controlador: AlumnosController, Acción: buscar
+[2025-11-02 03:32:27][INFO] Ruta coincidente: AlumnosController@buscar
+[2025-11-02 03:33:23][INFO] Ruta registrada: [GET] /alumnos → AlumnosController@index
+[2025-11-02 03:33:23][INFO] Ruta registrada: [GET] /alumnos/(\d+) → AlumnosController@show
+[2025-11-02 03:33:23][INFO] Ruta registrada: [POST] /alumnos → AlumnosController@store
+[2025-11-02 03:33:23][INFO] Ruta registrada: [PUT] /alumnos/(\d+) → AlumnosController@update
+[2025-11-02 03:33:23][INFO] Ruta registrada: [DELETE] /alumnos/(\d+) → AlumnosController@delete
+[2025-11-02 03:33:23][INFO] Ruta registrada: [GET] /alumnos/buscar → AlumnosController@buscar
+[2025-11-02 03:33:23][INFO] Ruta registrada: [GET] /profesores → ProfesoresController@index
+[2025-11-02 03:33:23][INFO] Ruta registrada: [GET] /profesores/(\d+) → ProfesoresController@show
+[2025-11-02 03:33:23][INFO] Ruta registrada: [POST] /profesores → ProfesoresController@store
+[2025-11-02 03:33:23][INFO] Ruta registrada: [GET] /cursos → CursosController@index
+[2025-11-02 03:33:23][INFO] Ruta registrada: [GET] /cursos/(\d+) → CursosController@show
+[2025-11-02 03:33:23][INFO] Ruta registrada: [POST] /cursos → CursosController@store
+[2025-11-02 03:33:23][INFO] Ruta registrada: [GET] /inscripciones → InscripcionesController@index
+[2025-11-02 03:33:23][INFO] Ruta registrada: [POST] /inscripciones → InscripcionesController@store
+[2025-11-02 03:33:23][INFO] Ruta registrada: [GET] /calificaciones → CalificacionesController@index
+[2025-11-02 03:33:23][INFO] Ruta registrada: [POST] /calificaciones → CalificacionesController@store
+[2025-11-02 03:33:23][INFO] Solicitud entrante: [GET] /alumnos/buscar
+[2025-11-02 03:33:23][INFO] Coincidencia encontrada → Controlador: AlumnosController, Acción: buscar
+[2025-11-02 03:33:23][INFO] Ruta coincidente: AlumnosController@buscar
+[2025-11-02 03:33:24][INFO] Ruta registrada: [GET] /alumnos → AlumnosController@index
+[2025-11-02 03:33:24][INFO] Ruta registrada: [GET] /alumnos/(\d+) → AlumnosController@show
+[2025-11-02 03:33:24][INFO] Ruta registrada: [POST] /alumnos → AlumnosController@store
+[2025-11-02 03:33:24][INFO] Ruta registrada: [PUT] /alumnos/(\d+) → AlumnosController@update
+[2025-11-02 03:33:24][INFO] Ruta registrada: [DELETE] /alumnos/(\d+) → AlumnosController@delete
+[2025-11-02 03:33:24][INFO] Ruta registrada: [GET] /alumnos/buscar → AlumnosController@buscar
+[2025-11-02 03:33:24][INFO] Ruta registrada: [GET] /profesores → ProfesoresController@index
+[2025-11-02 03:33:24][INFO] Ruta registrada: [GET] /profesores/(\d+) → ProfesoresController@show
+[2025-11-02 03:33:24][INFO] Ruta registrada: [POST] /profesores → ProfesoresController@store
+[2025-11-02 03:33:24][INFO] Ruta registrada: [GET] /cursos → CursosController@index
+[2025-11-02 03:33:24][INFO] Ruta registrada: [GET] /cursos/(\d+) → CursosController@show
+[2025-11-02 03:33:24][INFO] Ruta registrada: [POST] /cursos → CursosController@store
+[2025-11-02 03:33:24][INFO] Ruta registrada: [GET] /inscripciones → InscripcionesController@index
+[2025-11-02 03:33:24][INFO] Ruta registrada: [POST] /inscripciones → InscripcionesController@store
+[2025-11-02 03:33:24][INFO] Ruta registrada: [GET] /calificaciones → CalificacionesController@index
+[2025-11-02 03:33:24][INFO] Ruta registrada: [POST] /calificaciones → CalificacionesController@store
+[2025-11-02 03:33:24][INFO] Solicitud entrante: [GET] /alumnos/buscar
+[2025-11-02 03:33:24][INFO] Coincidencia encontrada → Controlador: AlumnosController, Acción: buscar
+[2025-11-02 03:33:24][INFO] Ruta coincidente: AlumnosController@buscar
+[2025-11-02 03:33:26][INFO] Ruta registrada: [GET] /alumnos → AlumnosController@index
+[2025-11-02 03:33:26][INFO] Ruta registrada: [GET] /alumnos/(\d+) → AlumnosController@show
+[2025-11-02 03:33:26][INFO] Ruta registrada: [POST] /alumnos → AlumnosController@store
+[2025-11-02 03:33:26][INFO] Ruta registrada: [PUT] /alumnos/(\d+) → AlumnosController@update
+[2025-11-02 03:33:26][INFO] Ruta registrada: [DELETE] /alumnos/(\d+) → AlumnosController@delete
+[2025-11-02 03:33:26][INFO] Ruta registrada: [GET] /alumnos/buscar → AlumnosController@buscar
+[2025-11-02 03:33:26][INFO] Ruta registrada: [GET] /profesores → ProfesoresController@index
+[2025-11-02 03:33:26][INFO] Ruta registrada: [GET] /profesores/(\d+) → ProfesoresController@show
+[2025-11-02 03:33:26][INFO] Ruta registrada: [POST] /profesores → ProfesoresController@store
+[2025-11-02 03:33:26][INFO] Ruta registrada: [GET] /cursos → CursosController@index
+[2025-11-02 03:33:26][INFO] Ruta registrada: [GET] /cursos/(\d+) → CursosController@show
+[2025-11-02 03:33:26][INFO] Ruta registrada: [POST] /cursos → CursosController@store
+[2025-11-02 03:33:26][INFO] Ruta registrada: [GET] /inscripciones → InscripcionesController@index
+[2025-11-02 03:33:26][INFO] Ruta registrada: [POST] /inscripciones → InscripcionesController@store
+[2025-11-02 03:33:26][INFO] Ruta registrada: [GET] /calificaciones → CalificacionesController@index
+[2025-11-02 03:33:26][INFO] Ruta registrada: [POST] /calificaciones → CalificacionesController@store
+[2025-11-02 03:33:26][INFO] Solicitud entrante: [GET] /alumnos/buscar
+[2025-11-02 03:33:26][INFO] Coincidencia encontrada → Controlador: AlumnosController, Acción: buscar
+[2025-11-02 03:33:26][INFO] Ruta coincidente: AlumnosController@buscar
+[2025-11-02 03:33:31][INFO] Ruta registrada: [GET] /alumnos → AlumnosController@index
+[2025-11-02 03:33:31][INFO] Ruta registrada: [GET] /alumnos/(\d+) → AlumnosController@show
+[2025-11-02 03:33:31][INFO] Ruta registrada: [POST] /alumnos → AlumnosController@store
+[2025-11-02 03:33:31][INFO] Ruta registrada: [PUT] /alumnos/(\d+) → AlumnosController@update
+[2025-11-02 03:33:31][INFO] Ruta registrada: [DELETE] /alumnos/(\d+) → AlumnosController@delete
+[2025-11-02 03:33:31][INFO] Ruta registrada: [GET] /alumnos/buscar → AlumnosController@buscar
+[2025-11-02 03:33:31][INFO] Ruta registrada: [GET] /profesores → ProfesoresController@index
+[2025-11-02 03:33:31][INFO] Ruta registrada: [GET] /profesores/(\d+) → ProfesoresController@show
+[2025-11-02 03:33:31][INFO] Ruta registrada: [POST] /profesores → ProfesoresController@store
+[2025-11-02 03:33:31][INFO] Ruta registrada: [GET] /cursos → CursosController@index
+[2025-11-02 03:33:31][INFO] Ruta registrada: [GET] /cursos/(\d+) → CursosController@show
+[2025-11-02 03:33:31][INFO] Ruta registrada: [POST] /cursos → CursosController@store
+[2025-11-02 03:33:31][INFO] Ruta registrada: [GET] /inscripciones → InscripcionesController@index
+[2025-11-02 03:33:31][INFO] Ruta registrada: [POST] /inscripciones → InscripcionesController@store
+[2025-11-02 03:33:31][INFO] Ruta registrada: [GET] /calificaciones → CalificacionesController@index
+[2025-11-02 03:33:31][INFO] Ruta registrada: [POST] /calificaciones → CalificacionesController@store
+[2025-11-02 03:33:31][INFO] Solicitud entrante: [GET] /alumnos/buscar
+[2025-11-02 03:33:31][INFO] Coincidencia encontrada → Controlador: AlumnosController, Acción: buscar
+[2025-11-02 03:33:31][INFO] Ruta coincidente: AlumnosController@buscar
+[2025-11-02 03:33:44][INFO] Ruta registrada: [GET] /alumnos → AlumnosController@index
+[2025-11-02 03:33:44][INFO] Ruta registrada: [GET] /alumnos/(\d+) → AlumnosController@show
+[2025-11-02 03:33:44][INFO] Ruta registrada: [POST] /alumnos → AlumnosController@store
+[2025-11-02 03:33:44][INFO] Ruta registrada: [PUT] /alumnos/(\d+) → AlumnosController@update
+[2025-11-02 03:33:44][INFO] Ruta registrada: [DELETE] /alumnos/(\d+) → AlumnosController@delete
+[2025-11-02 03:33:44][INFO] Ruta registrada: [GET] /alumnos/buscar → AlumnosController@buscar
+[2025-11-02 03:33:44][INFO] Ruta registrada: [GET] /profesores → ProfesoresController@index
+[2025-11-02 03:33:44][INFO] Ruta registrada: [GET] /profesores/(\d+) → ProfesoresController@show
+[2025-11-02 03:33:44][INFO] Ruta registrada: [POST] /profesores → ProfesoresController@store
+[2025-11-02 03:33:44][INFO] Ruta registrada: [GET] /cursos → CursosController@index
+[2025-11-02 03:33:44][INFO] Ruta registrada: [GET] /cursos/(\d+) → CursosController@show
+[2025-11-02 03:33:44][INFO] Ruta registrada: [POST] /cursos → CursosController@store
+[2025-11-02 03:33:44][INFO] Ruta registrada: [GET] /inscripciones → InscripcionesController@index
+[2025-11-02 03:33:44][INFO] Ruta registrada: [POST] /inscripciones → InscripcionesController@store
+[2025-11-02 03:33:44][INFO] Ruta registrada: [GET] /calificaciones → CalificacionesController@index
+[2025-11-02 03:33:44][INFO] Ruta registrada: [POST] /calificaciones → CalificacionesController@store
+[2025-11-02 03:33:44][INFO] Solicitud entrante: [GET] /alumnos
+[2025-11-02 03:33:44][INFO] Coincidencia encontrada → Controlador: AlumnosController, Acción: index
+[2025-11-02 03:33:44][INFO] Ruta coincidente: AlumnosController@index
+[2025-11-02 03:33:58][INFO] Ruta registrada: [GET] /alumnos → AlumnosController@index
+[2025-11-02 03:33:58][INFO] Ruta registrada: [GET] /alumnos/(\d+) → AlumnosController@show
+[2025-11-02 03:33:58][INFO] Ruta registrada: [POST] /alumnos → AlumnosController@store
+[2025-11-02 03:33:58][INFO] Ruta registrada: [PUT] /alumnos/(\d+) → AlumnosController@update
+[2025-11-02 03:33:58][INFO] Ruta registrada: [DELETE] /alumnos/(\d+) → AlumnosController@delete
+[2025-11-02 03:33:58][INFO] Ruta registrada: [GET] /alumnos/buscar → AlumnosController@buscar
+[2025-11-02 03:33:58][INFO] Ruta registrada: [GET] /profesores → ProfesoresController@index
+[2025-11-02 03:33:58][INFO] Ruta registrada: [GET] /profesores/(\d+) → ProfesoresController@show
+[2025-11-02 03:33:58][INFO] Ruta registrada: [POST] /profesores → ProfesoresController@store
+[2025-11-02 03:33:58][INFO] Ruta registrada: [GET] /cursos → CursosController@index
+[2025-11-02 03:33:58][INFO] Ruta registrada: [GET] /cursos/(\d+) → CursosController@show
+[2025-11-02 03:33:58][INFO] Ruta registrada: [POST] /cursos → CursosController@store
+[2025-11-02 03:33:58][INFO] Ruta registrada: [GET] /inscripciones → InscripcionesController@index
+[2025-11-02 03:33:58][INFO] Ruta registrada: [POST] /inscripciones → InscripcionesController@store
+[2025-11-02 03:33:58][INFO] Ruta registrada: [GET] /calificaciones → CalificacionesController@index
+[2025-11-02 03:33:58][INFO] Ruta registrada: [POST] /calificaciones → CalificacionesController@store
+[2025-11-02 03:33:58][INFO] Solicitud entrante: [GET] /alumnos
+[2025-11-02 03:33:58][INFO] Coincidencia encontrada → Controlador: AlumnosController, Acción: index
+[2025-11-02 03:33:58][INFO] Ruta coincidente: AlumnosController@index
+[2025-11-02 03:34:17][INFO] Ruta registrada: [GET] /alumnos → AlumnosController@index
+[2025-11-02 03:34:17][INFO] Ruta registrada: [GET] /alumnos/(\d+) → AlumnosController@show
+[2025-11-02 03:34:17][INFO] Ruta registrada: [POST] /alumnos → AlumnosController@store
+[2025-11-02 03:34:17][INFO] Ruta registrada: [PUT] /alumnos/(\d+) → AlumnosController@update
+[2025-11-02 03:34:17][INFO] Ruta registrada: [DELETE] /alumnos/(\d+) → AlumnosController@delete
+[2025-11-02 03:34:17][INFO] Ruta registrada: [GET] /alumnos/buscar → AlumnosController@buscar
+[2025-11-02 03:34:17][INFO] Ruta registrada: [GET] /profesores → ProfesoresController@index
+[2025-11-02 03:34:17][INFO] Ruta registrada: [GET] /profesores/(\d+) → ProfesoresController@show
+[2025-11-02 03:34:17][INFO] Ruta registrada: [POST] /profesores → ProfesoresController@store
+[2025-11-02 03:34:17][INFO] Ruta registrada: [GET] /cursos → CursosController@index
+[2025-11-02 03:34:17][INFO] Ruta registrada: [GET] /cursos/(\d+) → CursosController@show
+[2025-11-02 03:34:17][INFO] Ruta registrada: [POST] /cursos → CursosController@store
+[2025-11-02 03:34:17][INFO] Ruta registrada: [GET] /inscripciones → InscripcionesController@index
+[2025-11-02 03:34:17][INFO] Ruta registrada: [POST] /inscripciones → InscripcionesController@store
+[2025-11-02 03:34:17][INFO] Ruta registrada: [GET] /calificaciones → CalificacionesController@index
+[2025-11-02 03:34:17][INFO] Ruta registrada: [POST] /calificaciones → CalificacionesController@store
+[2025-11-02 03:34:17][INFO] Solicitud entrante: [GET] /alumnos
+[2025-11-02 03:34:17][INFO] Coincidencia encontrada → Controlador: AlumnosController, Acción: index
+[2025-11-02 03:34:17][INFO] Ruta coincidente: AlumnosController@index
+[2025-11-02 03:34:41][INFO] Ruta registrada: [GET] /alumnos → AlumnosController@index
+[2025-11-02 03:34:41][INFO] Ruta registrada: [GET] /alumnos/(\d+) → AlumnosController@show
+[2025-11-02 03:34:41][INFO] Ruta registrada: [POST] /alumnos → AlumnosController@store
+[2025-11-02 03:34:41][INFO] Ruta registrada: [PUT] /alumnos/(\d+) → AlumnosController@update
+[2025-11-02 03:34:41][INFO] Ruta registrada: [DELETE] /alumnos/(\d+) → AlumnosController@delete
+[2025-11-02 03:34:41][INFO] Ruta registrada: [GET] /alumnos/buscar → AlumnosController@buscar
+[2025-11-02 03:34:41][INFO] Ruta registrada: [GET] /profesores → ProfesoresController@index
+[2025-11-02 03:34:41][INFO] Ruta registrada: [GET] /profesores/(\d+) → ProfesoresController@show
+[2025-11-02 03:34:41][INFO] Ruta registrada: [POST] /profesores → ProfesoresController@store
+[2025-11-02 03:34:41][INFO] Ruta registrada: [GET] /cursos → CursosController@index
+[2025-11-02 03:34:41][INFO] Ruta registrada: [GET] /cursos/(\d+) → CursosController@show
+[2025-11-02 03:34:41][INFO] Ruta registrada: [POST] /cursos → CursosController@store
+[2025-11-02 03:34:41][INFO] Ruta registrada: [GET] /inscripciones → InscripcionesController@index
+[2025-11-02 03:34:41][INFO] Ruta registrada: [POST] /inscripciones → InscripcionesController@store
+[2025-11-02 03:34:41][INFO] Ruta registrada: [GET] /calificaciones → CalificacionesController@index
+[2025-11-02 03:34:41][INFO] Ruta registrada: [POST] /calificaciones → CalificacionesController@store
+[2025-11-02 03:34:41][INFO] Solicitud entrante: [GET] /alumnos/buscar
+[2025-11-02 03:34:41][INFO] Coincidencia encontrada → Controlador: AlumnosController, Acción: buscar
+[2025-11-02 03:34:41][INFO] Ruta coincidente: AlumnosController@buscar
