@@ -2,7 +2,7 @@
 return [
   'db' => [
     'host' => 'localhost',
-    'dbname' => 'centro-educativo',
+    'dbname' => 'centro_educativo',
     'user' => 'root',
     'pass' => '',
   ],

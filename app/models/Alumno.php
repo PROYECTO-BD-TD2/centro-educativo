@@ -85,12 +85,6 @@ class Alumno extends Model
       $params['fecha_nacimiento'] = $filters['fecha_nacimiento'];
     }
 
-    // Paginación opcional (limit y offset)
-    $limit = isset($filters['limit']) ? (int)$filters['limit'] : 50;
-    $offset = isset($filters['offset']) ? (int)$filters['offset'] : 0;
-
-    $sql .= " LIMIT :offset, :limit";
-
     // Preparar la consulta
     $stmt = $this->db->prepare($sql);
 
@@ -98,8 +92,6 @@ class Alumno extends Model
     foreach ($params as $key => $value) {
       $stmt->bindValue(":$key", $value);
     }
-    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
 
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
