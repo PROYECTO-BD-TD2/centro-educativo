@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Gestión Educativa</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <nav class="col-md-2 d-md-block sidebar">
+        <div class="position-sticky pt-3">
+          <div class="text-center mb-4">
+            <h4 class="text-white"><i class="fas fa-graduation-cap"></i> Sistema Educativo</h4>
+          </div>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="#" data-section="alumnos">
+                <i class="fas fa-user-graduate"></i> Alumnos
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-section="profesores">
+                <i class="fas fa-chalkboard-teacher"></i> Profesores
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-section="cursos">
+                <i class="fas fa-book"></i> Cursos
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-section="calificaciones">
+                <i class="fas fa-star"></i> Calificaciones
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-section="inscripciones">
+                <i class="fas fa-clipboard-list"></i> Inscripciones
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="col-md-10 ms-sm-auto content-wrapper">
+        <!-- Sección Alumnos -->
+        <div id="alumnos" class="section active">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-user-graduate text-primary"></i> Gestión de Alumnos</h2>
+            <button class="btn btn-primary" id="btnNuevoAlumno">
+              <i class="fas fa-plus"></i> Nuevo Alumno
+            </button>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col">Lista de Alumnos</div>
+                <div class="col-auto">
+                  <input type="text" class="form-control form-control-sm search-box" placeholder="Buscar..."
+                    id="searchAlumnos">
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-hover" id="alumnosTable">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Nombre</th>
+                      <th>Apellido</th>
+                      <th>Fecha Nacimiento</th>
+                      <th>Email</th>
+                      <th>Teléfono</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="alumnosTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sección Profesores -->
+        <div id="profesores" class="section">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-chalkboard-teacher text-primary"></i> Gestión de Profesores</h2>
+            <button class="btn btn-primary" id="btnNuevoProfesor">
+              <i class="fas fa-plus"></i> Nuevo Profesor
+            </button>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col">Lista de Profesores</div>
+                <div class="col-auto">
+                  <input type="text" class="form-control form-control-sm search-box" placeholder="Buscar..."
+                    id="searchProfesores">
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-hover" id="profesoresTable">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Nombre</th>
+                      <th>Apellido</th>
+                      <th>Email</th>
+                      <th>Teléfono</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="profesoresTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sección Cursos -->
+        <div id="cursos" class="section">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-book text-primary"></i> Gestión de Cursos</h2>
+            <button class="btn btn-primary" id="btnNuevoCurso">
+              <i class="fas fa-plus"></i> Nuevo Curso
+            </button>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col">Lista de Cursos</div>
+                <div class="col-auto">
+                  <input type="text" class="form-control form-control-sm search-box" placeholder="Buscar..."
+                    id="searchCursos">
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-hover" id="cursosTable">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Nombre</th>
+                      <th>Descripción</th>
+                      <th>Profesor</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="cursosTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sección Calificaciones -->
+        <div id="calificaciones" class="section">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-star text-primary"></i> Gestión de Calificaciones</h2>
+            <button class="btn btn-primary" id="btnNuevaCalificacion">
+              <i class="fas fa-plus"></i> Nueva Calificación
+            </button>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col">Lista de Calificaciones</div>
+                <div class="col-auto">
+                  <input type="text" class="form-control form-control-sm search-box" placeholder="Buscar..."
+                    id="searchCalificaciones">
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-hover" id="calificacionesTable">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Alumno</th>
+                      <th>Curso</th>
+                      <th>Calificación</th>
+                      <th>Fecha</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="calificacionesTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sección Inscripciones -->
+        <div id="inscripciones" class="section">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-clipboard-list text-primary"></i> Gestión de Inscripciones</h2>
+            <button class="btn btn-primary" id="btnNuevaInscripcion">
+              <i class="fas fa-plus"></i> Nueva Inscripción
+            </button>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col">Lista de Inscripciones</div>
+                <div class="col-auto">
+                  <input type="text" class="form-control form-control-sm search-box" placeholder="Buscar..."
+                    id="searchInscripciones">
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-hover" id="inscripcionesTable">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Alumno</th>
+                      <th>Curso</th>
+                      <th>Fecha Inscripción</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="inscripcionesTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Modals -->
+  <!-- Modal Alumno -->
+  <div class="modal fade" id="modalAlumno" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalAlumnoTitle">Nuevo Alumno</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formAlumno">
+            <input type="hidden" id="alumnoId">
+            <div class="mb-3">
+              <label class="form-label">Nombre *</label>
+              <input type="text" class="form-control" id="alumnoNombre" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Apellido *</label>
+              <input type="text" class="form-control" id="alumnoApellido" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Fecha de Nacimiento *</label>
+              <input type="date" class="form-control" id="alumnoFechaNac" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email *</label>
+              <input type="email" class="form-control" id="alumnoEmail" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Teléfono</label>
+              <input type="text" class="form-control" id="alumnoTelefono">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="btnGuardarAlumno">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Profesor -->
+  <div class="modal fade" id="modalProfesor" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalProfesorTitle">Nuevo Profesor</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formProfesor">
+            <input type="hidden" id="profesorId">
+            <div class="mb-3">
+              <label class="form-label">Nombre *</label>
+              <input type="text" class="form-control" id="profesorNombre" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Apellido *</label>
+              <input type="text" class="form-control" id="profesorApellido" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email *</label>
+              <input type="email" class="form-control" id="profesorEmail" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Teléfono</label>
+              <input type="text" class="form-control" id="profesorTelefono">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="btnGuardarProfesor">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Curso -->
+  <div class="modal fade" id="modalCurso" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalCursoTitle">Nuevo Curso</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formCurso">
+            <input type="hidden" id="cursoId">
+            <div class="mb-3">
+              <label class="form-label">Nombre del Curso *</label>
+              <input type="text" class="form-control" id="cursoNombre" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Descripción</label>
+              <textarea class="form-control" id="cursoDescripcion" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Profesor</label>
+              <select class="form-select" id="cursoProfesor">
+                <option value="">Seleccione un profesor</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="btnGuardarCurso">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Calificación -->
+  <div class="modal fade" id="modalCalificacion" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalCalificacionTitle">Nueva Calificación</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formCalificacion">
+            <input type="hidden" id="calificacionId">
+            <div class="mb-3">
+              <label class="form-label">Alumno *</label>
+              <select class="form-select" id="calificacionAlumno" required>
+                <option value="">Seleccione un alumno</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Curso *</label>
+              <select class="form-select" id="calificacionCurso" required>
+                <option value="">Seleccione un curso</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Calificación (1-12) *</label>
+              <input type="number" class="form-control" id="calificacionNota" min="1" max="12" step="0.01" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Fecha *</label>
+              <input type="date" class="form-control" id="calificacionFecha" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="btnGuardarCalificacion">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Inscripción -->
+  <div class="modal fade" id="modalInscripcion" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalInscripcionTitle">Nueva Inscripción</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formInscripcion">
+            <input type="hidden" id="inscripcionId">
+            <div class="mb-3">
+              <label class="form-label">Alumno *</label>
+              <select class="form-select" id="inscripcionAlumno" required>
+                <option value="">Seleccione un alumno</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Curso *</label>
+              <select class="form-select" id="inscripcionCurso" required>
+                <option value="">Seleccione un curso</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Fecha de Inscripción *</label>
+              <input type="date" class="form-control" id="inscripcionFecha" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="btnGuardarInscripcion">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/alumnos.js"></script>
+  <script src="js/profesores.js"></script>
+  <script src="js/cursos.js"></script>
+  <script src="js/calificaciones.js"></script>
+  <script src="js/inscripciones.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
