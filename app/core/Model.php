@@ -1,5 +1,5 @@
 <?php
-// app/core/Model.php
+
 class Model
 {
   protected $db;

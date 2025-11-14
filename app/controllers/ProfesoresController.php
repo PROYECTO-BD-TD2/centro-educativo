@@ -1,5 +1,5 @@
 <?php
-// app/controllers/ProfesoresController.php
+
 class ProfesoresController extends Controller
 {
   protected $model;
@@ -28,7 +28,7 @@ class ProfesoresController extends Controller
   public function store(Request $request, Response $response)
   {
     $body = $request->body;
-    // Validación mínima
+
     $required = ['documento', 'nombre', 'apellido', 'email'];
     foreach ($required as $f) {
       if (empty($body[$f])) {
@@ -40,7 +40,7 @@ class ProfesoresController extends Controller
       $data = $this->model->create($body);
       $response->json(['success' => true, 'message' => 'Profesor creado', 'data' => $data], 201);
     } catch (PDOException $e) {
-      // Manejo simple de errores (posible UNIQUE constraint collision)
+
       $response->json(['success' => false, 'message' => $e->getMessage()], 400);
     }
   }

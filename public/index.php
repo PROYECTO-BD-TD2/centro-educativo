@@ -1,5 +1,5 @@
 <?php
-// public/index.php
+
 declare(strict_types=1);
 
 require_once __DIR__ . '/../app/config.php';
@@ -8,7 +8,7 @@ require_once __DIR__ . '/../app/core/Request.php';
 require_once __DIR__ . '/../app/core/Response.php';
 require_once __DIR__ . '/../app/core/Controller.php';
 require_once __DIR__ . '/../app/core/Model.php';
-// Autocarga básica de controladores y modelos
+
 $logger = new Logger();
 
 spl_autoload_register(function ($class) {
@@ -24,10 +24,10 @@ spl_autoload_register(function ($class) {
 
 $config = require __DIR__ . '/../app/config.php';
 
-// init Router
+
 $router = new Router();
 
-// Rutas de ejemplo (RESTful)
+
 $router->add('GET',  '/alumnos',               'AlumnosController@index');
 $router->add('GET',  '/alumnos/(\d+)',        'AlumnosController@show');
 $router->add('POST', '/alumnos',               'AlumnosController@store');
@@ -66,7 +66,7 @@ $router->add('GET', '/calificaciones/buscar',    'CalificacionesController@busca
 $request = new Request();
 $response = new Response();
 
-// Disparar ruta
+
 try {
   $logger->info("Solicitud entrante: [{$request->method}] {$request->path}");
   $router->dispatch($request, $response, $config);

@@ -1,5 +1,5 @@
 <?php
-// app/models/Alumno.php
+
 class Curso extends Model
 {
   protected $table = 'cursos';

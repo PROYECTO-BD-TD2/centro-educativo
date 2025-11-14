@@ -1,5 +1,5 @@
 <?php
-// app/core/Response.php
+
 class Response
 {
   public function json($data, int $status = 200)

@@ -1,5 +1,5 @@
 <?php
-// app/models/Alumno.php
+
 class Alumno extends Model
 {
   protected $table = 'alumnos';
@@ -61,7 +61,7 @@ class Alumno extends Model
     $sql = "SELECT * FROM {$this->table} WHERE 1=1";
     $params = [];
 
-    // Campos de búsqueda dinámicos
+
     if (!empty($filters['nombre'])) {
       $sql .= " AND nombre LIKE :nombre";
       $params['nombre'] = '%' . $filters['nombre'] . '%';
@@ -92,10 +92,10 @@ class Alumno extends Model
       $params['fecha_nacimiento'] = $filters['fecha_nacimiento'];
     }
 
-    // Preparar la consulta
+
     $stmt = $this->db->prepare($sql);
 
-    // Bind manual para LIMIT/OFFSET porque no acepta parámetros nombrados con PDO en MySQL
+
     foreach ($params as $key => $value) {
       $stmt->bindValue(":$key", $value);
     }

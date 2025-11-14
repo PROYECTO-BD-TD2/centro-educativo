@@ -1,9 +1,9 @@
-// calificaciones.js - Módulo para gestión de calificaciones
+
 
 let modalCalificacion;
 let currentCalificacionId = null;
 
-// Inicializar módulo de calificaciones
+
 function initCalificaciones() {
     modalCalificacion = new bootstrap.Modal(document.getElementById('modalCalificacion'));
     
@@ -12,7 +12,7 @@ function initCalificaciones() {
     document.getElementById('searchCalificaciones').addEventListener('keyup', searchCalificaciones);
 }
 
-// Cargar calificaciones en la tabla
+
 async function loadCalificaciones() {
     try {
 
@@ -64,7 +64,7 @@ async function loadCalificaciones() {
     }
 }
 
-// Obtener clase de badge según la calificación
+
 function getBadgeClass(nota) {
     if (nota >= 10) return 'bg-success';
     if (nota >= 7) return 'bg-primary';
@@ -72,14 +72,14 @@ function getBadgeClass(nota) {
     return 'bg-danger';
 }
 
-// Abrir modal para nueva calificación
+
 async function openModalCalificacion() {
     currentCalificacionId = null;
     document.getElementById('formCalificacion').reset();
     document.getElementById('calificacionId').value = '';
     document.getElementById('modalCalificacionTitle').textContent = 'Nueva Calificación';
     
-    // Establecer fecha actual
+
     document.getElementById('calificacionFecha').valueAsDate = new Date();
     
     await loadAlumnosSelect();
@@ -87,7 +87,7 @@ async function openModalCalificacion() {
     modalCalificacion.show();
 }
 
-// Ver detalles de una calificación
+
 async function viewCalificacion(id) {
     try {
         const response = await CalificacionesAPI.getById(id);
@@ -108,7 +108,7 @@ async function viewCalificacion(id) {
     }
 }
 
-// Editar calificación
+
 async function editCalificacion(id) {
     try {
         const response = await CalificacionesAPI.getById(id);
@@ -133,7 +133,7 @@ async function editCalificacion(id) {
     }
 }
 
-// Guardar calificación (crear o actualizar)
+
 async function saveCalificacion() {
     const form = document.getElementById('formCalificacion');
     
@@ -149,7 +149,7 @@ async function saveCalificacion() {
         fecha_calificacion: document.getElementById('calificacionFecha').value
     };
     
-    // Validar rango de calificación
+
     if (calificacion.calificacion < 1 || calificacion.calificacion > 12) {
         showError('La calificación debe estar entre 1 y 12');
         return;
@@ -172,7 +172,7 @@ async function saveCalificacion() {
     }
 }
 
-// Eliminar calificación
+
 async function deleteCalificacion(id) {
     const confirmed = await showConfirm(
         '¿Está seguro?',
@@ -191,7 +191,7 @@ async function deleteCalificacion(id) {
     }
 }
 
-// Buscar calificaciones
+
 function searchCalificaciones() {
     const searchTerm = document.getElementById('searchCalificaciones').value.toLowerCase();
     const table = document.getElementById('calificacionesTable');
@@ -203,7 +203,7 @@ function searchCalificaciones() {
     }
 }
 
-// Cargar opciones de alumnos en selects
+
 async function loadAlumnosSelect() {
     try {
         const response = await AlumnosAPI.getAll();

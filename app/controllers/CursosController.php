@@ -27,7 +27,7 @@ class CursosController extends Controller
   {
     $b = $request->body;
     if (empty($b['nombre'])) $response->json(['success' => false, 'message' => 'nombre obligatorio'], 400);
-    // verificar si profesor existe cuando se envía profesor_id
+
     if (!empty($b['profesor_id'])) {
       $stmt = $this->db->prepare("SELECT id FROM profesores WHERE id = :id");
       $stmt->execute(['id' => $b['profesor_id']]);
@@ -60,7 +60,7 @@ class CursosController extends Controller
     if (empty($b['nombre'])) {
       $response->json(['success' => false, 'message' => 'nombre obligatorio'], 400);
     }
-    // verificar si profesor existe cuando se envía profesor_id
+
     if (!empty($b['profesor_id'])) {
       $stmt = $this->db->prepare("SELECT id FROM profesores WHERE id = :id");
       $stmt->execute(['id' => $b['profesor_id']]);

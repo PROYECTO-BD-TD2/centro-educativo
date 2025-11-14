@@ -1,5 +1,5 @@
 <?php
-// app/models/Profesor.php
+
 class Profesor extends Model
 {
   protected $table = 'profesores';

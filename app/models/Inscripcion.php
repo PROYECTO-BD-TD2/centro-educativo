@@ -1,5 +1,5 @@
 <?php
-// app/models/Inscripcion.php
+
 class Inscripcion extends Model
 {
   protected $table = 'inscripciones';

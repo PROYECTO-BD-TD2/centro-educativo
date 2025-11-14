@@ -1,31 +1,31 @@
-// app.js - Archivo principal de la aplicación
 
-// Inicializar la aplicación cuando el DOM esté listo
+
+
 document.addEventListener('DOMContentLoaded', function() {
     initApp();
 });
 
-// Función principal de inicialización
+
 function initApp() {
     console.log('Iniciando aplicación...');
     
-    // Inicializar módulos
+
     initAlumnos();
     initProfesores();
     initCursos();
     initCalificaciones();
     initInscripciones();
     
-    // Configurar navegación
+
     setupNavigation();
     
-    // Cargar datos iniciales
+
     loadAlumnos();
     
     console.log('Aplicación iniciada correctamente');
 }
 
-// Configurar navegación entre secciones
+
 function setupNavigation() {
     const navLinks = document.querySelectorAll('.sidebar .nav-link');
     
@@ -36,30 +36,30 @@ function setupNavigation() {
             const section = this.getAttribute('data-section');
             showSection(section);
             
-            // Actualizar estado activo en el menú
+
             navLinks.forEach(l => l.classList.remove('active'));
             this.classList.add('active');
         });
     });
 }
 
-// Mostrar sección específica
+
 function showSection(sectionName) {
-    // Ocultar todas las secciones
+
     const sections = document.querySelectorAll('.section');
     sections.forEach(section => section.classList.remove('active'));
     
-    // Mostrar la sección seleccionada
+
     const targetSection = document.getElementById(sectionName);
     if (targetSection) {
         targetSection.classList.add('active');
         
-        // Cargar datos de la sección
+
         loadSectionData(sectionName);
     }
 }
 
-// Cargar datos según la sección
+
 function loadSectionData(section) {
     switch(section) {
         case 'alumnos':
@@ -80,9 +80,9 @@ function loadSectionData(section) {
     }
 }
 
-// ==================== UTILIDADES ====================
 
-// Formatear fecha
+
+
 function formatDate(dateString) {
     if (!dateString) return '-';
     
@@ -94,19 +94,19 @@ function formatDate(dateString) {
     return `${day}/${month}/${year}`;
 }
 
-// Mostrar mensaje de éxito
+
 function showSuccess(message) {
     showToast(message, 'success');
 }
 
-// Mostrar mensaje de error
+
 function showError(message) {
     showToast(message, 'danger');
 }
 
-// Mostrar toast notification
+
 function showToast(message, type = 'info') {
-    // Crear elemento de toast
+
     const toastContainer = getOrCreateToastContainer();
     
     const toastId = 'toast-' + Date.now();
@@ -126,13 +126,13 @@ function showToast(message, type = 'info') {
     const bsToast = new bootstrap.Toast(toast);
     bsToast.show();
     
-    // Eliminar el toast después de que se oculte
+
     toast.addEventListener('hidden.bs.toast', function() {
         toast.remove();
     });
 }
 
-// Obtener o crear contenedor de toasts
+
 function getOrCreateToastContainer() {
     let container = document.getElementById('toastContainer');
     
@@ -147,7 +147,7 @@ function getOrCreateToastContainer() {
     return container;
 }
 
-// Mostrar alerta personalizada
+
 function showAlert(title, message, type = 'info') {
     const iconMap = {
         info: 'fa-info-circle',
@@ -187,23 +187,23 @@ function showAlert(title, message, type = 'info') {
         </div>
     `;
     
-    // Eliminar modal anterior si existe
+
     const oldAlert = document.getElementById('customAlert');
     if (oldAlert) oldAlert.remove();
     
-    // Agregar nuevo modal
+
     document.body.insertAdjacentHTML('beforeend', alertHTML);
     
     const modal = new bootstrap.Modal(document.getElementById('customAlert'));
     modal.show();
     
-    // Limpiar después de cerrar
+
     document.getElementById('customAlert').addEventListener('hidden.bs.modal', function() {
         this.remove();
     });
 }
 
-// Mostrar diálogo de confirmación
+
 function showConfirm(title, message) {
     return new Promise((resolve) => {
         const confirmHTML = `
@@ -232,18 +232,18 @@ function showConfirm(title, message) {
             </div>
         `;
         
-        // Eliminar modal anterior si existe
+
         const oldConfirm = document.getElementById('customConfirm');
         if (oldConfirm) oldConfirm.remove();
         
-        // Agregar nuevo modal
+
         document.body.insertAdjacentHTML('beforeend', confirmHTML);
         
         const modalElement = document.getElementById('customConfirm');
         const modal = new bootstrap.Modal(modalElement);
         modal.show();
         
-        // Manejar botones
+
         document.getElementById('btnAcceptConfirm').addEventListener('click', function() {
             modal.hide();
             resolve(true);
@@ -254,7 +254,7 @@ function showConfirm(title, message) {
             resolve(false);
         });
         
-        // Limpiar después de cerrar
+
         modalElement.addEventListener('hidden.bs.modal', function() {
             this.remove();
             resolve(false);
@@ -262,13 +262,13 @@ function showConfirm(title, message) {
     });
 }
 
-// Validar email
+
 function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
 }
 
-// Escapar HTML para prevenir XSS
+
 function escapeHtml(text) {
     const map = {
         '&': '&amp;',
