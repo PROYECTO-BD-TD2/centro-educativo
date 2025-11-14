@@ -76,6 +76,7 @@
                   <thead>
                     <tr>
                       <th>ID</th>
+                      <th>Documento</th>
                       <th>Nombre</th>
                       <th>Apellido</th>
                       <th>Fecha Nacimiento</th>
@@ -116,6 +117,7 @@
                   <thead>
                     <tr>
                       <th>ID</th>
+                      <th>Documento</th>
                       <th>Nombre</th>
                       <th>Apellido</th>
                       <th>Email</th>
@@ -261,6 +263,11 @@
           <form id="formAlumno">
             <input type="hidden" id="alumnoId">
             <div class="mb-3">
+              <label class="form-label">Documento *</label>
+              <input type="text" class="form-control" id="alumnoDocumento" required>
+            </div>
+            <div class="mb-3">
+
               <label class="form-label">Nombre *</label>
               <input type="text" class="form-control" id="alumnoNombre" required>
             </div>
@@ -301,6 +308,10 @@
         <div class="modal-body">
           <form id="formProfesor">
             <input type="hidden" id="profesorId">
+            <div class="mb-3">
+              <label class="form-label">Documento *</label>
+              <input type="text" class="form-control" id="profesorDocumento" required>
+            </div>
             <div class="mb-3">
               <label class="form-label">Nombre *</label>
               <input type="text" class="form-control" id="profesorNombre" required>

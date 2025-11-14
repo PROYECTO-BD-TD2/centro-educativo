@@ -15,7 +15,10 @@ function initInscripciones() {
 // Cargar inscripciones en la tabla
 async function loadInscripciones() {
     try {
-        const inscripciones = await InscripcionesAPI.getAll();
+        const response = await InscripcionesAPI.getAll();
+        if (!response.success) throw new Error('Error al obtener inscripciones');
+        const inscripciones = response.data;
+
         const tbody = document.getElementById('inscripcionesTableBody');
         
         if (!inscripciones || inscripciones.length === 0) {
@@ -73,7 +76,9 @@ async function openModalInscripcion() {
 // Ver detalles de una inscripción
 async function viewInscripcion(id) {
     try {
-        const insc = await InscripcionesAPI.getById(id);
+        const response = await InscripcionesAPI.getById(id);
+        if (!response.success) throw new Error('Inscripción no encontrada');
+        const insc = response.data;
         
         const message = `
             <strong>Alumno:</strong> ${insc.alumno_nombre || 'Alumno #' + insc.alumno_id}<br>
@@ -91,7 +96,9 @@ async function viewInscripcion(id) {
 // Editar inscripción
 async function editInscripcion(id) {
     try {
-        const insc = await InscripcionesAPI.getById(id);
+        const response = await InscripcionesAPI.getById(id);
+        if (!response.success) throw new Error('Inscripción no encontrada');
+        const insc = response.data;
         
         await loadAlumnosSelect();
         await loadCursosSelect();

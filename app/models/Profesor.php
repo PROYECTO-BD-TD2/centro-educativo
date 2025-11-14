@@ -7,22 +7,23 @@ class Profesor extends Model
   public function all()
   {
     $stmt = $this->db->query("SELECT * FROM {$this->table}");
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $stmt->fetchAll();
   }
 
   public function find(int $id)
   {
     $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE id = :id");
     $stmt->execute(['id' => $id]);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    return $stmt->fetch();
   }
 
   public function create(array $data)
   {
-    $sql = "INSERT INTO {$this->table} (nombre, apellido, email, telefono)
-            VALUES (:nombre, :apellido, :email, :telefono)";
+    $sql = "INSERT INTO {$this->table} (documento, nombre, apellido, email, telefono)
+            VALUES (:documento, :nombre, :apellido, :email, :telefono)";
     $stmt = $this->db->prepare($sql);
     $stmt->execute([
+      'documento' => $data['documento'],
       'nombre' => $data['nombre'],
       'apellido' => $data['apellido'],
       'email' => $data['email'],
@@ -37,9 +38,10 @@ class Profesor extends Model
 
   public function update(int $id, array $data)
   {
-    $sql = "UPDATE {$this->table} SET nombre=:nombre, apellido=:apellido, email=:email, telefono=:telefono WHERE id=:id";
+    $sql = "UPDATE {$this->table} SET documento=:documento, nombre=:nombre, apellido=:apellido, email=:email, telefono=:telefono WHERE id=:id";
     $stmt = $this->db->prepare($sql);
     $stmt->execute([
+      'documento' => $data['documento'],
       'nombre' => $data['nombre'],
       'apellido' => $data['apellido'],
       'email' => $data['email'],

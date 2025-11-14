@@ -28,7 +28,9 @@ class AlumnosController extends Controller
   public function store(Request $request, Response $response)
   {
     $body = $request->body;
-    $required = ['nombre', 'apellido', 'fecha_nacimiento', 'email'];
+    $this->logger->info("Storing new alumno" . json_encode($body));
+
+    $required = ['documento', 'nombre', 'apellido', 'fecha_nacimiento', 'email'];
     foreach ($required as $f) {
       if (empty($body[$f])) {
         $response->json(['success' => false, 'message' => "Campo $f es obligatorio"], 400);
@@ -39,8 +41,8 @@ class AlumnosController extends Controller
       $id = $this->model->create($body);
       $alumno = $this->model->find($id);
       $response->json(['success' => true, 'message' => 'Alumno creado', 'data' => $alumno], 201);
-    } catch (PDOException $e) {
-      // Manejo simple de errores (posible UNIQUE constraint collision)
+    } catch (Exception  $e) {
+      $this->logger->error("Error creating alumno: " . $e->getMessage());
       $response->json(['success' => false, 'message' => $e->getMessage()], 400);
     }
   }
@@ -49,14 +51,17 @@ class AlumnosController extends Controller
   {
     $body = $request->body;
     try {
-      $count = $this->model->update((int)$id, $body);
-      if ($count === 0) {
-        $response->json(['success' => false, 'message' => 'Alumno no encontrado o sin cambios'], 404);
-      } else if ($count > 1) {
-        $response->json(['success' => false, 'message' => 'Error: se actualizaron múltiples registros, comuniquece con el administrador'], 500);
+      $alumno = $this->model->find((int)$id);
+      if (!$alumno) {
+        $response->json(['success' => false, 'message' => 'Alumno no encontrado'], 404);
       } else {
-        $alumno = $this->model->find((int)$id);
-        $response->json(['success' => true, 'message' => "Registros actualizados: $count", 'data' => $alumno]);
+        $count = $this->model->update((int)$id, $body);
+        if ($count > 1) {
+          $response->json(['success' => false, 'message' => 'Error: se actualizaron múltiples registros, comuniquece con el administrador'], 500);
+        } else {
+          $alumno = $this->model->find((int)$id);
+          $response->json(['success' => true, 'message' => "Registros actualizados: $count", 'data' => $alumno]);
+        }
       }
     } catch (PDOException $e) {
       $response->json(['success' => false, 'message' => $e->getMessage()], 400);

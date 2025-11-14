@@ -15,7 +15,11 @@ function initCalificaciones() {
 // Cargar calificaciones en la tabla
 async function loadCalificaciones() {
     try {
-        const calificaciones = await CalificacionesAPI.getAll();
+
+        const response  = await CalificacionesAPI.getAll();
+        if (!response.success)  throw new Error(response.message || 'Error al obtener calificaciones');
+
+        const calificaciones = response.data;
         const tbody = document.getElementById('calificacionesTableBody');
         
         if (!calificaciones || calificaciones.length === 0) {
@@ -86,7 +90,9 @@ async function openModalCalificacion() {
 // Ver detalles de una calificación
 async function viewCalificacion(id) {
     try {
-        const cal = await CalificacionesAPI.getById(id);
+        const response = await CalificacionesAPI.getById(id);
+        if (!response.success) throw new Error('Calificación no encontrada');
+        const cal = response.data;
         
         const message = `
             <strong>Alumno:</strong> ${cal.alumno_nombre || 'Alumno #' + cal.alumno_id}<br>
@@ -105,8 +111,10 @@ async function viewCalificacion(id) {
 // Editar calificación
 async function editCalificacion(id) {
     try {
-        const cal = await CalificacionesAPI.getById(id);
-        
+        const response = await CalificacionesAPI.getById(id);
+        if (!response.success) throw new Error('Calificación no encontrada');
+        const cal = response.data;
+
         await loadAlumnosSelect();
         await loadCursosSelect();
         
@@ -198,7 +206,10 @@ function searchCalificaciones() {
 // Cargar opciones de alumnos en selects
 async function loadAlumnosSelect() {
     try {
-        const alumnos = await AlumnosAPI.getAll();
+        const response = await AlumnosAPI.getAll();
+        if (!response.success) throw new Error('No se pudieron cargar los alumnos');
+        const alumnos = response.data;
+
         const selectCalificacion = document.getElementById('calificacionAlumno');
         const selectInscripcion = document.getElementById('inscripcionAlumno');
         

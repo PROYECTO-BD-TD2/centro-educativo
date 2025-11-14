@@ -29,7 +29,7 @@ class ProfesoresController extends Controller
   {
     $body = $request->body;
     // Validación mínima
-    $required = ['nombre', 'apellido', 'email'];
+    $required = ['documento', 'nombre', 'apellido', 'email'];
     foreach ($required as $f) {
       if (empty($body[$f])) {
         $response->json(['success' => false, 'message' => "Campo $f es obligatorio"], 400);
@@ -63,5 +63,17 @@ class ProfesoresController extends Controller
       $response->json(['success' => false, 'message' => 'Profesor no encontrado'], 404);
     }
     $response->json(['success' => true, 'message' => 'Profesor eliminado']);
+  }
+
+  public function buscar(Request $req, Response $res)
+  {
+    $params = $req->query;
+    $result = $this->model->search($params);
+
+    if (!empty($result)) {
+      return $res->json(['success' => true, 'data' => $result]);
+    } else {
+      return $res->json(['success' => false, 'message' => 'No se encontraron resultados']);
+    }
   }
 }

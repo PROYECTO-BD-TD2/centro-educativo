@@ -1,3 +1,4 @@
+
 // alumnos.js - Módulo para gestión de alumnos
 
 // Variables globales del módulo
@@ -17,13 +18,16 @@ function initAlumnos() {
 // Cargar alumnos en la tabla
 async function loadAlumnos() {
     try {
-        const alumnos = await AlumnosAPI.getAll();
+        const response = await AlumnosAPI.getAll();
+        if (!response.success)  throw new Error(response.message || 'Error al obtener alumnos');
+
+        const alumnos = response.data;
         const tbody = document.getElementById('alumnosTableBody');
         
         if (!alumnos || alumnos.length === 0) {
             tbody.innerHTML = `
                 <tr>
-                    <td colspan="7" class="text-center text-muted py-4">
+                    <td colspan="8" class="text-center text-muted py-4">
                         <i class="fas fa-user-graduate fa-3x mb-3 d-block" style="opacity: 0.3;"></i>
                         No hay alumnos registrados
                     </td>
@@ -35,6 +39,7 @@ async function loadAlumnos() {
         tbody.innerHTML = alumnos.map(alumno => `
             <tr>
                 <td>${alumno.id}</td>
+                <td>${alumno.documento}</td>
                 <td>${alumno.nombre}</td>
                 <td>${alumno.apellido}</td>
                 <td>${formatDate(alumno.fecha_nacimiento)}</td>
@@ -71,10 +76,13 @@ function openModalAlumno() {
 // Ver detalles de un alumno
 async function viewAlumno(id) {
     try {
-        const alumno = await AlumnosAPI.getById(id);
-        
+        const response = await AlumnosAPI.getById(id);
+        if (!response.success)  throw new Error(response.message || 'Error al obtener alumno');
+
+        const alumno = response.data;
         const message = `
             <strong>Nombre:</strong> ${alumno.nombre} ${alumno.apellido}<br>
+            <strong>Documento:</strong> ${alumno.documento}<br>
             <strong>Email:</strong> ${alumno.email}<br>
             <strong>Fecha de Nacimiento:</strong> ${formatDate(alumno.fecha_nacimiento)}<br>
             <strong>Teléfono:</strong> ${alumno.telefono || 'No especificado'}
@@ -90,10 +98,14 @@ async function viewAlumno(id) {
 // Editar alumno
 async function editAlumno(id) {
     try {
-        const alumno = await AlumnosAPI.getById(id);
-        
+        const response = await AlumnosAPI.getById(id);
+        if (!response.success)  throw new Error(response.message || 'Error al obtener alumno');
+
+        const alumno = response.data;
+
         currentAlumnoId = alumno.id;
         document.getElementById('alumnoId').value = alumno.id;
+        document.getElementById('alumnoDocumento').value = alumno.documento;
         document.getElementById('alumnoNombre').value = alumno.nombre;
         document.getElementById('alumnoApellido').value = alumno.apellido;
         document.getElementById('alumnoFechaNac').value = alumno.fecha_nacimiento;
@@ -118,6 +130,7 @@ async function saveAlumno() {
     }
     
     const alumno = {
+        documento: document.getElementById('alumnoDocumento').value.trim(),
         nombre: document.getElementById('alumnoNombre').value.trim(),
         apellido: document.getElementById('alumnoApellido').value.trim(),
         fecha_nacimiento: document.getElementById('alumnoFechaNac').value,

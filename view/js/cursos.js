@@ -15,7 +15,11 @@ function initCursos() {
 // Cargar cursos en la tabla
 async function loadCursos() {
     try {
-        const cursos = await CursosAPI.getAll();
+        
+        const response = await CursosAPI.getAll();
+        if (!response.success)  throw new Error(response.message || 'Error al obtener cursos');
+
+        const cursos = response.data;
         const tbody = document.getElementById('cursosTableBody');
         
         if (!cursos || cursos.length === 0) {
@@ -69,7 +73,9 @@ async function openModalCurso() {
 // Ver detalles de un curso
 async function viewCurso(id) {
     try {
-        const curso = await CursosAPI.getById(id);
+        const response = await CursosAPI.getById(id);
+        if (!response.success)  throw new Error(response.message || 'Error al obtener curso');
+        const curso = response.data;
         
         const message = `
             <strong>Nombre:</strong> ${curso.nombre}<br>
@@ -87,7 +93,10 @@ async function viewCurso(id) {
 // Editar curso
 async function editCurso(id) {
     try {
-        const curso = await CursosAPI.getById(id);
+        
+        const response = await CursosAPI.getById(id);
+        if (!response.success)  throw new Error(response.message || 'Error al obtener curso');
+        const curso = response.data;
         
         await loadProfesoresSelect();
         
@@ -171,7 +180,10 @@ function searchCursos() {
 // Cargar opciones de cursos en selects
 async function loadCursosSelect() {
     try {
-        const cursos = await CursosAPI.getAll();
+        const response = await CursosAPI.getAll();
+        if (!response.success) throw new Error('No se pudieron cargar los cursos');
+        const cursos = response.data;
+
         const selectCalificacion = document.getElementById('calificacionCurso');
         const selectInscripcion = document.getElementById('inscripcionCurso');
         

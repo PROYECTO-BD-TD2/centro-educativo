@@ -6,13 +6,13 @@ class Curso extends Model
 
   public function all()
   {
-    $stmt = $this->db->query("SELECT * FROM {$this->table}");
+    $stmt = $this->db->query("SELECT {$this->table}.*, profesores.nombre as profesor_nombre FROM {$this->table} left join profesores ON cursos.profesor_id = profesores.id");
     return $stmt->fetchAll();
   }
 
   public function find(int $id)
   {
-    $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE id = :id");
+    $stmt = $this->db->prepare("SELECT {$this->table}.*, profesores.nombre as profesor_nombre FROM {$this->table} left join profesores ON cursos.profesor_id = profesores.id WHERE cursos.id = :id");
     $stmt->execute(['id' => $id]);
     return $stmt->fetch();
   }

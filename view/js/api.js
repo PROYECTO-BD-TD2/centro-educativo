@@ -2,7 +2,7 @@
 
 // Configuración de la API
 const API_CONFIG = {
-    baseURL: 'http://localhost:3000/api', // Cambia esto según tu configuración
+    baseURL: 'http://localhost/developer/proyrcto-final-DB/public/index.php', // Cambia esto según tu configuración
     headers: {
         'Content-Type': 'application/json'
     }
@@ -27,6 +27,7 @@ async function request(endpoint, options = {}) {
         const response = await fetch(url, config);
         
         if (!response.ok) {
+            console.log(await response.text());
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         

@@ -9,7 +9,7 @@ class Calificacion extends Model
     return $this->db->query("SELECT * FROM {$this->table}")->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  private function find(int $id)
+  public function find(int $id)
   {
     $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE id = :id");
     $stmt->execute(['id' => $id]);
@@ -40,6 +40,48 @@ class Calificacion extends Model
       'fecha_calificacion' => $data['fecha_calificacion'],
       'id' => $id
     ]);
-    return $this->find($id);
+    return $stmt->rowCount();
+  }
+
+  public function delete(int $id)
+  {
+    $stmt = $this->db->prepare("DELETE FROM {$this->table} WHERE id = :id");
+    $stmt->execute(['id' => $id]);
+    return $stmt->rowCount();
+  }
+
+  public function search(array $params)
+  {
+    $conditions = [];
+    $values = [];
+
+    if (isset($params['alumno_id'])) {
+      $conditions[] = 'alumno_id = :alumno_id';
+      $values['alumno_id'] = $params['alumno_id'];
+    }
+
+    if (isset($params['curso_id'])) {
+      $conditions[] = 'curso_id = :curso_id';
+      $values['curso_id'] = $params['curso_id'];
+    }
+
+    if (isset($params['min_calificacion'])) {
+      $conditions[] = 'calificacion >= :min_calificacion';
+      $values['min_calificacion'] = $params['min_calificacion'];
+    }
+
+    if (isset($params['max_calificacion'])) {
+      $conditions[] = 'calificacion <= :max_calificacion';
+      $values['max_calificacion'] = $params['max_calificacion'];
+    }
+
+    $sql = "SELECT * FROM {$this->table}";
+    if (!empty($conditions)) {
+      $sql .= ' WHERE ' . implode(' AND ', $conditions);
+    }
+
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute($values);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 }

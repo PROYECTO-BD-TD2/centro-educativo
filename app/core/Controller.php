@@ -4,7 +4,7 @@ class Controller
 {
   protected $config;
   protected $db;
-
+  protected $logger;
   public function __construct(array $config)
   {
     $this->config = $config;
@@ -15,5 +15,6 @@ class Controller
       PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
     ];
     $this->db = new PDO($dsn, $dbconf['user'], $dbconf['pass'], $opt);
+    $this->logger = new Logger();
   }
 }

@@ -7,22 +7,23 @@ class Alumno extends Model
   public function all()
   {
     $stmt = $this->db->query("SELECT * FROM {$this->table}");
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $stmt->fetchAll();
   }
 
   public function find(int $id)
   {
     $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE id = :id");
     $stmt->execute(['id' => $id]);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    return $stmt->fetch();
   }
 
   public function create(array $data)
   {
-    $sql = "INSERT INTO {$this->table} (nombre, apellido, fecha_nacimiento, email, telefono)
-                VALUES (:nombre, :apellido, :fecha_nacimiento, :email, :telefono)";
+    $sql = "INSERT INTO {$this->table} (documento,nombre, apellido, fecha_nacimiento, email, telefono)
+                VALUES (:documento, :nombre, :apellido, :fecha_nacimiento, :email, :telefono)";
     $stmt = $this->db->prepare($sql);
     $stmt->execute([
+      'documento' => $data['documento'],
       'nombre' => $data['nombre'],
       'apellido' => $data['apellido'],
       'fecha_nacimiento' => $data['fecha_nacimiento'],
@@ -34,9 +35,10 @@ class Alumno extends Model
 
   public function update(int $id, array $data)
   {
-    $sql = "UPDATE {$this->table} SET nombre=:nombre, apellido=:apellido, fecha_nacimiento=:fecha_nacimiento, email=:email, telefono=:telefono WHERE id=:id";
+    $sql = "UPDATE {$this->table} SET documento=:documento, nombre=:nombre, apellido=:apellido, fecha_nacimiento=:fecha_nacimiento, email=:email, telefono=:telefono WHERE id=:id";
     $stmt = $this->db->prepare($sql);
     $stmt->execute([
+      'documento' => $data['documento'],
       'nombre' => $data['nombre'],
       'apellido' => $data['apellido'],
       'fecha_nacimiento' => $data['fecha_nacimiento'],
@@ -63,6 +65,11 @@ class Alumno extends Model
     if (!empty($filters['nombre'])) {
       $sql .= " AND nombre LIKE :nombre";
       $params['nombre'] = '%' . $filters['nombre'] . '%';
+    }
+
+    if (!empty($filters['documento'])) {
+      $sql .= " AND documento = :documento";
+      $params['documento'] = $filters['documento'];
     }
 
     if (!empty($filters['apellido'])) {

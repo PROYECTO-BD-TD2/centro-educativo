@@ -16,6 +16,15 @@ class InscripcionesController extends Controller
     $response->json(['success' => true, 'data' => $data]);
   }
 
+  public function show(Request $request, Response $response, $id)
+  {
+    $inscripcion = $this->model->find((int)$id);
+    if (!$inscripcion) {
+      $response->json(['success' => false, 'message' => 'Inscripción no encontrada'], 404);
+    }
+    $response->json(['success' => true, 'data' => $inscripcion]);
+  }
+
   public function store(Request $request, Response $response)
   {
     $b = $request->body;
@@ -23,24 +32,61 @@ class InscripcionesController extends Controller
       $response->json(['success' => false, 'message' => 'alumno_id y curso_id son obligatorios'], 400);
     }
 
-    // Validar existencia alumno y curso
-    $stmt = $this->db->prepare("SELECT id FROM alumnos WHERE id=:id");
-    $stmt->execute(['id' => $b['alumno_id']]);
-    if (!$stmt->fetch()) $response->json(['success' => false, 'message' => 'Alumno no existe'], 400);
-
-    $stmt = $this->db->prepare("SELECT id FROM cursos WHERE id=:id");
-    $stmt->execute(['id' => $b['curso_id']]);
-    if (!$stmt->fetch()) $response->json(['success' => false, 'message' => 'Curso no existe'], 400);
-
-    // Insertar con manejo de transacción y control de duplicados
     try {
-      $this->db->beginTransaction();
-      $id = $this->model->create($b); // crear método en modelo Inscripcion
-      $this->db->commit();
-      $response->json(['success' => true, 'id' => $id], 201);
+      $id = $this->model->create($b);
+      $inscripcion = $this->model->find($id);
+      $response->json(['success' => true, 'message' => 'Inscripción creada', 'data' => $inscripcion], 201);
     } catch (PDOException $e) {
-      $this->db->rollBack();
       $response->json(['success' => false, 'message' => $e->getMessage()], 400);
+    }
+  }
+
+  public function update(Request $request, Response $response, $id)
+  {
+    $b = $request->body;
+    try {
+      $calificacion = $this->model->find((int)$id);
+      if (!$calificacion) {
+        $response->json(['success' => false, 'message' => 'Inscripción no encontrada'], 404);
+      } else {
+        $count = $this->model->update((int)$id, $b);
+        if ($count > 1) {
+          $response->json(['success' => false, 'message' => 'Error: se actualizaron múltiples registros, comuniquece con el administrador'], 500);
+        } else {
+          $inscripcion = $this->model->find((int)$id);
+          $response->json(['success' => true, 'message' => "Registros actualizados: $count", 'data' => $inscripcion]);
+        }
+      }
+    } catch (Exception $e) {
+      $response->json(['success' => false, 'message' => $e->getMessage()], 400);
+    }
+  }
+
+  public function delete(Request $request, Response $response, $id)
+  {
+    try {
+      $count = $this->model->delete((int)$id);
+      if ($count === 0) {
+        $response->json(['success' => false, 'message' => 'Inscripción no encontrada'], 404);
+      } else if ($count > 1) {
+        $response->json(['success' => false, 'message' => 'Error: se eliminaron múltiples registros, comuniquece con el administrador'], 500);
+      } else {
+        $response->json(['success' => true, 'message' => "Inscripción eliminada correctamente"]);
+      }
+    } catch (PDOException $e) {
+      $response->json(['success' => false, 'message' => $e->getMessage()], 400);
+    }
+  }
+
+  public function buscar(Request $req, Response $res)
+  {
+    $params = $req->query;
+    $result = $this->model->search($params);
+
+    if (!empty($result)) {
+      return $res->json(['success' => true, 'data' => $result]);
+    } else {
+      return $res->json(['success' => false, 'message' => 'No se encontraron resultados']);
     }
   }
 }

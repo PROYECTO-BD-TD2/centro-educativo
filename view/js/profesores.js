@@ -15,13 +15,17 @@ function initProfesores() {
 // Cargar profesores en la tabla
 async function loadProfesores() {
     try {
-        const profesores = await ProfesoresAPI.getAll();
+        
+        const response = await ProfesoresAPI.getAll();
+        if (!response.success)  throw new Error(response.message || 'Error al obtener profesores');
+
+        const profesores = response.data;
         const tbody = document.getElementById('profesoresTableBody');
         
         if (!profesores || profesores.length === 0) {
             tbody.innerHTML = `
                 <tr>
-                    <td colspan="6" class="text-center text-muted py-4">
+                    <td colspan="7" class="text-center text-muted py-4">
                         <i class="fas fa-chalkboard-teacher fa-3x mb-3 d-block" style="opacity: 0.3;"></i>
                         No hay profesores registrados
                     </td>
@@ -33,6 +37,7 @@ async function loadProfesores() {
         tbody.innerHTML = profesores.map(profesor => `
             <tr>
                 <td>${profesor.id}</td>
+                <td>${profesor.documento}</td>
                 <td>${profesor.nombre}</td>
                 <td>${profesor.apellido}</td>
                 <td>${profesor.email}</td>
@@ -68,9 +73,13 @@ function openModalProfesor() {
 // Ver detalles de un profesor
 async function viewProfesor(id) {
     try {
-        const profesor = await ProfesoresAPI.getById(id);
+        const response = await ProfesoresAPI.getById(id);
+        if (!response.success) throw new Error(response.message || 'Error al obtener profesor');
+        
+        const profesor = response.data;
         
         const message = `
+            <strong>Documento:</strong> ${profesor.documento}<br>
             <strong>Nombre:</strong> ${profesor.nombre} ${profesor.apellido}<br>
             <strong>Email:</strong> ${profesor.email}<br>
             <strong>Teléfono:</strong> ${profesor.telefono || 'No especificado'}
@@ -86,9 +95,13 @@ async function viewProfesor(id) {
 // Editar profesor
 async function editProfesor(id) {
     try {
-        const profesor = await ProfesoresAPI.getById(id);
+        const response = await ProfesoresAPI.getById(id);
+        if (!response.success) throw new Error(response.message || 'Error al obtener profesor');
         
+        const profesor = response.data;
+       
         currentProfesorId = profesor.id;
+         document.getElementById('profesorDocumento').value = profesor.documento;
         document.getElementById('profesorId').value = profesor.id;
         document.getElementById('profesorNombre').value = profesor.nombre;
         document.getElementById('profesorApellido').value = profesor.apellido;
@@ -113,6 +126,7 @@ async function saveProfesor() {
     }
     
     const profesor = {
+        documento: document.getElementById('profesorDocumento').value.trim(),
         nombre: document.getElementById('profesorNombre').value.trim(),
         apellido: document.getElementById('profesorApellido').value.trim(),
         email: document.getElementById('profesorEmail').value.trim(),
@@ -170,7 +184,9 @@ function searchProfesores() {
 // Cargar opciones de profesores en selects
 async function loadProfesoresSelect() {
     try {
-        const profesores = await ProfesoresAPI.getAll();
+        const response = await ProfesoresAPI.getAll();
+        if (!response.success) throw new Error('Error al obtener profesores');
+        const profesores = response.data;
         const select = document.getElementById('cursoProfesor');
         
         select.innerHTML = '<option value="">Seleccione un profesor</option>';
