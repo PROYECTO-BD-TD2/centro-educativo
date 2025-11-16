@@ -31435,7 +31435,7 @@ oller@buscar
 [2025-11-16 01:18:04][INFO] Solicitud entrante: [GET] /profesores/curso/3
 [2025-11-16 01:18:04][INFO] Ruta registrada: [DELETE] /inscripciones/(\d+) → InscripcionesController@delete
 [2025-11-16 01:18:04][INFO] Solicitud entrante: [GET] /profesores/curso/3
-� InscripcionesController@buscar
+� InscripcionesController@buscar
 [2025-11-16 01:18:04][INFO] Ruta registrada: [GET] /calificaciones → CalificacionesController@index
 [2025-11-16 01:18:04][INFO] Coincidencia encontrada → Controlador: ProfesoresController, Acción: getByCurso
 [2025-11-16 01:18:04][INFO] Ruta registrada: [GET] /calificaciones/(\d+) → CalificacionesController@show
