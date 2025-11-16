@@ -1,9 +1,9 @@
-// cursos.js - Módulo para gestión de cursos
+
 
 let modalCurso;
 let currentCursoId = null;
 
-// Inicializar módulo de cursos
+
 function initCursos() {
     modalCurso = new bootstrap.Modal(document.getElementById('modalCurso'));
     
@@ -12,7 +12,7 @@ function initCursos() {
     document.getElementById('searchCursos').addEventListener('keyup', searchCursos);
 }
 
-// Cargar cursos en la tabla
+
 async function loadCursos() {
     try {
         
@@ -39,7 +39,7 @@ async function loadCursos() {
                 <td>${curso.id}</td>
                 <td>${curso.nombre}</td>
                 <td>${curso.descripcion || '-'}</td>
-                <td>${curso.profesor_nombre || 'Sin asignar'}</td>
+                <td>${curso.profesor_documento || 'Sin asignar'}</td>
                 <td class="action-buttons">
                     <button class="btn btn-sm btn-info" onclick="viewCurso(${curso.id})" title="Ver">
                         <i class="fas fa-eye"></i>
@@ -59,7 +59,7 @@ async function loadCursos() {
     }
 }
 
-// Abrir modal para nuevo curso
+
 async function openModalCurso() {
     currentCursoId = null;
     document.getElementById('formCurso').reset();
@@ -70,7 +70,7 @@ async function openModalCurso() {
     modalCurso.show();
 }
 
-// Ver detalles de un curso
+
 async function viewCurso(id) {
     try {
         const response = await CursosAPI.getById(id);
@@ -80,7 +80,7 @@ async function viewCurso(id) {
         const message = `
             <strong>Nombre:</strong> ${curso.nombre}<br>
             <strong>Descripción:</strong> ${curso.descripcion || 'Sin descripción'}<br>
-            <strong>Profesor:</strong> ${curso.profesor_nombre || 'Sin asignar'}
+            <strong>Profesor:</strong> ${curso.profesor_documento || 'Sin asignar'}
         `;
         
         showAlert('Información del Curso', message, 'info');
@@ -90,7 +90,7 @@ async function viewCurso(id) {
     }
 }
 
-// Editar curso
+
 async function editCurso(id) {
     try {
         
@@ -114,7 +114,7 @@ async function editCurso(id) {
     }
 }
 
-// Guardar curso (crear o actualizar)
+
 async function saveCurso() {
     const form = document.getElementById('formCurso');
     
@@ -146,7 +146,7 @@ async function saveCurso() {
     }
 }
 
-// Eliminar curso
+
 async function deleteCurso(id) {
     const confirmed = await showConfirm(
         '¿Está seguro?',
@@ -165,7 +165,7 @@ async function deleteCurso(id) {
     }
 }
 
-// Buscar cursos
+
 function searchCursos() {
     const searchTerm = document.getElementById('searchCursos').value.toLowerCase();
     const table = document.getElementById('cursosTable');
@@ -177,7 +177,7 @@ function searchCursos() {
     }
 }
 
-// Cargar opciones de cursos en selects
+
 async function loadCursosSelect() {
     try {
         const response = await CursosAPI.getAll();
@@ -194,5 +194,44 @@ async function loadCursosSelect() {
         if (selectInscripcion) selectInscripcion.innerHTML = optionHTML;
     } catch (error) {
         console.error('Error al cargar cursos en select:', error);
+    }
+
+
+}
+
+async function loadCursosSelectByAlumno(idAlumnoSeleccionado) {
+    try {
+        const response = await CursosAPI.getByAlumno(idAlumnoSeleccionado);
+        if (!response.success) throw new Error('No se pudieron cargar los cursos para el alumno');
+        const cursos = response.data;
+
+        const selectCalificacionCurso = document.getElementById('calificacionCurso');
+        const optionHTML = '<option value="0">Seleccione un curso</option>' +
+                            cursos.map(curso => `<option value="${curso.curso_id}">${curso.nombre}</option>`).join('');        
+        
+        if (selectCalificacionCurso) selectCalificacionCurso.innerHTML = optionHTML;
+    } catch (error) {
+        console.error('Error al cargar cursos en select:', error);
+    }
+
+
+}
+
+async function loadProfesorSelectByCurso(idCursoSeleccionado) {    
+    try {
+        const response = await ProfesoresAPI.getByCurso(idCursoSeleccionado);
+        if (!response.success) throw new Error('No se pudieron cargar los profesores para el curso');
+        const profesores = response.data;
+
+        const selectCalificacionProfesor = document.getElementById('calificacionProfesor');
+        const optionHTML = '<option value="">Seleccione un profesor</option>' +
+                            profesores.map(profesor => `<option value="${profesor.id}">${profesor.documento}</option>`).join('');
+                           
+        if (selectCalificacionProfesor){
+            selectCalificacionProfesor.innerHTML = optionHTML;
+            selectCalificacionProfesor.value= profesores.length >0 ? profesores[0].id : '';
+        }  
+    } catch (error) {
+        console.error('Error al cargar profesor en select:', error);
     }
 }

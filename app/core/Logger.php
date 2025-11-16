@@ -1,5 +1,5 @@
 <?php
-// app/core/Logger.php
+
 class Logger
 {
   private string $logFile;

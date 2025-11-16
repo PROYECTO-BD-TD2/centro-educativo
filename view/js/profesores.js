@@ -1,9 +1,9 @@
-// profesores.js - Módulo para gestión de profesores
+
 
 let modalProfesor;
 let currentProfesorId = null;
 
-// Inicializar módulo de profesores
+
 function initProfesores() {
     modalProfesor = new bootstrap.Modal(document.getElementById('modalProfesor'));
     
@@ -12,7 +12,7 @@ function initProfesores() {
     document.getElementById('searchProfesores').addEventListener('keyup', searchProfesores);
 }
 
-// Cargar profesores en la tabla
+
 async function loadProfesores() {
     try {
         
@@ -61,7 +61,7 @@ async function loadProfesores() {
     }
 }
 
-// Abrir modal para nuevo profesor
+
 function openModalProfesor() {
     currentProfesorId = null;
     document.getElementById('formProfesor').reset();
@@ -70,7 +70,7 @@ function openModalProfesor() {
     modalProfesor.show();
 }
 
-// Ver detalles de un profesor
+
 async function viewProfesor(id) {
     try {
         const response = await ProfesoresAPI.getById(id);
@@ -92,7 +92,7 @@ async function viewProfesor(id) {
     }
 }
 
-// Editar profesor
+
 async function editProfesor(id) {
     try {
         const response = await ProfesoresAPI.getById(id);
@@ -116,7 +116,7 @@ async function editProfesor(id) {
     }
 }
 
-// Guardar profesor (crear o actualizar)
+
 async function saveProfesor() {
     const form = document.getElementById('formProfesor');
     
@@ -150,7 +150,7 @@ async function saveProfesor() {
     }
 }
 
-// Eliminar profesor
+
 async function deleteProfesor(id) {
     const confirmed = await showConfirm(
         '¿Está seguro?',
@@ -169,7 +169,7 @@ async function deleteProfesor(id) {
     }
 }
 
-// Buscar profesores
+
 function searchProfesores() {
     const searchTerm = document.getElementById('searchProfesores').value.toLowerCase();
     const table = document.getElementById('profesoresTable');
@@ -181,7 +181,7 @@ function searchProfesores() {
     }
 }
 
-// Cargar opciones de profesores en selects
+
 async function loadProfesoresSelect() {
     try {
         const response = await ProfesoresAPI.getAll();

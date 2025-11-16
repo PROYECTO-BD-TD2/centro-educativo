@@ -1,12 +1,22 @@
 <?php
-// app/models/Inscripcion.php
+
 class Inscripcion extends Model
 {
   protected $table = 'inscripciones';
 
   public function all()
   {
-    return $this->db->query("SELECT * FROM {$this->table}")->fetchAll();
+    $qry = "SELECT i.*, 
+    a.id as alumno_id,
+    a.documento AS alumno_documento,
+    a.nombre as alumno_nombre,
+    a.apellido as alumno_apellido,
+    c.id as curso_id,
+    c.nombre as curso_nombre
+    FROM {$this->table} i 
+    JOIN alumnos a ON i.alumno_id = a.id
+    JOIN cursos c ON i.curso_id = c.id";
+    return $this->db->query($qry)->fetchAll();
   }
 
   public function create(array $data)
@@ -22,7 +32,18 @@ class Inscripcion extends Model
 
   public function find(int $id)
   {
-    $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE id = :id");
+    $qry = "SELECT i.*, 
+    a.id as alumno_id,
+    a.documento AS alumno_documento,
+    a.nombre as alumno_nombre,
+    a.apellido as alumno_apellido,
+    c.id as curso_id,
+    c.nombre as curso_nombre
+    FROM {$this->table} i
+    JOIN alumnos a ON i.alumno_id = a.id
+    JOIN cursos c ON i.curso_id = c.id
+    WHERE i.id = :id";
+    $stmt = $this->db->prepare($qry);
     $stmt->execute(['id' => $id]);
     return $stmt->fetch();
   }

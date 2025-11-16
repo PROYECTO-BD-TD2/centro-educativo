@@ -195,8 +195,9 @@
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Alumno</th>
+                      <th>Documento Alumno</th>
                       <th>Curso</th>
+                      <th>Documento Profesor</th>
                       <th>Calificación</th>
                       <th>Fecha</th>
                       <th>Acciones</th>
@@ -385,15 +386,21 @@
           <form id="formCalificacion">
             <input type="hidden" id="calificacionId">
             <div class="mb-3">
-              <label class="form-label">Alumno *</label>
+              <label class="form-label">Documento Alumno *</label>
               <select class="form-select" id="calificacionAlumno" required>
-                <option value="">Seleccione un alumno</option>
+                <option value="0">Seleccione un alumno</option>
               </select>
             </div>
             <div class="mb-3">
               <label class="form-label">Curso *</label>
               <select class="form-select" id="calificacionCurso" required>
-                <option value="">Seleccione un curso</option>
+                <option value="0"></option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Documento Profesor *</label>
+              <select class="form-select" id="calificacionProfesor" required disabled="true">
+                <option value="0"></option>
               </select>
             </div>
             <div class="mb-3">
@@ -426,7 +433,7 @@
           <form id="formInscripcion">
             <input type="hidden" id="inscripcionId">
             <div class="mb-3">
-              <label class="form-label">Alumno *</label>
+              <label class="form-label">Documento Alumno *</label>
               <select class="form-select" id="inscripcionAlumno" required>
                 <option value="">Seleccione un alumno</option>
               </select>

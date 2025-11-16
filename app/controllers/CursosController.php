@@ -27,7 +27,7 @@ class CursosController extends Controller
   {
     $b = $request->body;
     if (empty($b['nombre'])) $response->json(['success' => false, 'message' => 'nombre obligatorio'], 400);
-    // verificar si profesor existe cuando se envía profesor_id
+
     if (!empty($b['profesor_id'])) {
       $stmt = $this->db->prepare("SELECT id FROM profesores WHERE id = :id");
       $stmt->execute(['id' => $b['profesor_id']]);
@@ -60,7 +60,7 @@ class CursosController extends Controller
     if (empty($b['nombre'])) {
       $response->json(['success' => false, 'message' => 'nombre obligatorio'], 400);
     }
-    // verificar si profesor existe cuando se envía profesor_id
+
     if (!empty($b['profesor_id'])) {
       $stmt = $this->db->prepare("SELECT id FROM profesores WHERE id = :id");
       $stmt->execute(['id' => $b['profesor_id']]);
@@ -75,6 +75,18 @@ class CursosController extends Controller
     $response->json(['success' => true, 'message' => 'Curso actualizado']);
   }
 
+
+  public function forAlumno(Request $request, Response $response, $alumnoId)
+  {
+    try {
+      $data = $this->model->getByAlumno((int)$alumnoId);
+      $response->json(['success' => true, 'data' => $data]);
+    } catch (Exception $e) {
+      $this->logger->error("Error al obtener cursos para el alumno {$alumnoId}: " . $e->getMessage());
+      $response->json(['success' => false, 'message' => 'Error en la solicitud'], 500);
+    }
+  }
+
   public function buscar(Request $req, Response $res)
   {
     $params = $req->query;
@@ -84,6 +96,17 @@ class CursosController extends Controller
       return $res->json(['success' => true, 'data' => $result]);
     } else {
       return $res->json(['success' => false, 'message' => 'No se encontraron resultados']);
+    }
+  }
+
+  public function forProfesor(Request $request, Response $response, $profesorId)
+  {
+    try {
+      $data = $this->model->getByProfesor((int)$profesorId);
+      $response->json(['success' => true, 'data' => $data]);
+    } catch (Exception $e) {
+      $this->logger->error("Error al obtener cursos para el profesor {$profesorId}: " . $e->getMessage());
+      $response->json(['success' => false, 'message' => 'Error en la solicitud'], 500);
     }
   }
 }

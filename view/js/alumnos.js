@@ -1,21 +1,21 @@
 
-// alumnos.js - Módulo para gestión de alumnos
 
-// Variables globales del módulo
+
+
 let modalAlumno;
 let currentAlumnoId = null;
 
-// Inicializar módulo de alumnos
+
 function initAlumnos() {
     modalAlumno = new bootstrap.Modal(document.getElementById('modalAlumno'));
     
-    // Event listeners
+
     document.getElementById('btnNuevoAlumno').addEventListener('click', openModalAlumno);
     document.getElementById('btnGuardarAlumno').addEventListener('click', saveAlumno);
     document.getElementById('searchAlumnos').addEventListener('keyup', searchAlumnos);
 }
 
-// Cargar alumnos en la tabla
+
 async function loadAlumnos() {
     try {
         const response = await AlumnosAPI.getAll();
@@ -64,7 +64,7 @@ async function loadAlumnos() {
     }
 }
 
-// Abrir modal para nuevo alumno
+
 function openModalAlumno() {
     currentAlumnoId = null;
     document.getElementById('formAlumno').reset();
@@ -73,7 +73,7 @@ function openModalAlumno() {
     modalAlumno.show();
 }
 
-// Ver detalles de un alumno
+
 async function viewAlumno(id) {
     try {
         const response = await AlumnosAPI.getById(id);
@@ -95,7 +95,7 @@ async function viewAlumno(id) {
     }
 }
 
-// Editar alumno
+
 async function editAlumno(id) {
     try {
         const response = await AlumnosAPI.getById(id);
@@ -120,7 +120,7 @@ async function editAlumno(id) {
     }
 }
 
-// Guardar alumno (crear o actualizar)
+
 async function saveAlumno() {
     const form = document.getElementById('formAlumno');
     
@@ -155,7 +155,7 @@ async function saveAlumno() {
     }
 }
 
-// Eliminar alumno
+
 async function deleteAlumno(id) {
     const confirmed = await showConfirm(
         '¿Está seguro?',
@@ -174,7 +174,7 @@ async function deleteAlumno(id) {
     }
 }
 
-// Buscar alumnos
+
 function searchAlumnos() {
     const searchTerm = document.getElementById('searchAlumnos').value.toLowerCase();
     const table = document.getElementById('alumnosTable');

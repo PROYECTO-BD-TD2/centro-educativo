@@ -1,28 +1,63 @@
 <?php
-// app/models/Calificacion.php
+
 class Calificacion extends Model
 {
   protected $table = 'calificaciones';
 
   public function all()
   {
-    return $this->db->query("SELECT * FROM {$this->table}")->fetchAll(PDO::FETCH_ASSOC);
+    $query = " SELECT 
+                cal.*, 
+                  a.id as alumno_id,
+                  a.documento AS alumno_documento,
+                  a.nombre AS alumno_nombre,
+                  a.apellido AS alumno_apellido,
+                  c.id as curso_id,
+                  c.nombre AS curso_nombre,
+                  p.id as profesor_id,
+                  p.documento AS profesor_documento,
+                  p.nombre AS profesor_nombre,
+                  p.apellido AS profesor_apellido
+            FROM {$this->table} cal
+            JOIN alumnos a ON cal.alumno_id = a.id
+            JOIN cursos c ON cal.curso_id = c.id
+            JOIN profesores p ON cal.profesor_id = p.id";
+    return $this->db->query($query)->fetchAll();
   }
 
   public function find(int $id)
   {
-    $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE id = :id");
+
+    $query = "SELECT 
+              cal.*, 
+              a.id as alumno_id,
+              a.documento AS alumno_documento,
+              a.nombre AS alumno_nombre,
+              a.apellido AS alumno_apellido,
+              c.id as curso_id,
+              c.nombre AS curso_nombre,
+              p.id as profesor_id,
+              p.documento AS profesor_documento,
+              p.nombre AS profesor_nombre,
+              p.apellido AS profesor_apellido
+              FROM {$this->table} cal
+              JOIN alumnos a ON cal.alumno_id = a.id
+              JOIN cursos c ON cal.curso_id = c.id
+              JOIN profesores p ON cal.profesor_id = p.id
+              WHERE cal.id = :id";
+    $stmt = $this->db->prepare($query);
     $stmt->execute(['id' => $id]);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    return $stmt->fetch();
   }
 
   public function create(array $data)
   {
-    $sql = "INSERT INTO {$this->table} (alumno_id, curso_id, calificacion) VALUES (:alumno_id, :curso_id, :calificacion)";
+    $sql = "INSERT INTO {$this->table} (alumno_id, curso_id, profesor_id, calificacion) VALUES (:alumno_id, :curso_id, :profesor_id, :calificacion)";
     $stmt = $this->db->prepare($sql);
     $stmt->execute([
       'alumno_id' => $data['alumno_id'],
       'curso_id' => $data['curso_id'],
+      'profesor_id' => $data['profesor_id'],
       'calificacion' => $data['calificacion']
     ]);
     $id = (int)$this->db->lastInsertId();
@@ -31,10 +66,11 @@ class Calificacion extends Model
 
   public function update(int $id, array $data)
   {
-    $sql = "UPDATE {$this->table} SET alumno_id=:alumno_id, curso_id=:curso_id, calificacion=:calificacion, fecha_calificacion=:fecha_calificacion WHERE id=:id";
+    $sql = "UPDATE {$this->table} SET alumno_id=:alumno_id, profesor_id=:profesor_id, curso_id=:curso_id, calificacion=:calificacion, fecha_calificacion=:fecha_calificacion WHERE id=:id";
     $stmt = $this->db->prepare($sql);
     $stmt->execute([
       'alumno_id' => $data['alumno_id'],
+      'profesor_id' => $data['profesor_id'],
       'curso_id' => $data['curso_id'],
       'calificacion' => $data['calificacion'],
       'fecha_calificacion' => $data['fecha_calificacion'],

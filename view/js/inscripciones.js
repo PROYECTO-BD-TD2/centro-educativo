@@ -1,9 +1,9 @@
-// inscripciones.js - Módulo para gestión de inscripciones
+
 
 let modalInscripcion;
 let currentInscripcionId = null;
 
-// Inicializar módulo de inscripciones
+
 function initInscripciones() {
     modalInscripcion = new bootstrap.Modal(document.getElementById('modalInscripcion'));
     
@@ -12,7 +12,7 @@ function initInscripciones() {
     document.getElementById('searchInscripciones').addEventListener('keyup', searchInscripciones);
 }
 
-// Cargar inscripciones en la tabla
+
 async function loadInscripciones() {
     try {
         const response = await InscripcionesAPI.getAll();
@@ -36,7 +36,7 @@ async function loadInscripciones() {
         tbody.innerHTML = inscripciones.map(insc => `
             <tr>
                 <td>${insc.id}</td>
-                <td>${insc.alumno_nombre || 'Alumno #' + insc.alumno_id}</td>
+                <td>${insc.alumno_documento || 'Alumno #' + insc.alumno_id}</td>
                 <td>${insc.curso_nombre || 'Curso #' + insc.curso_id}</td>
                 <td>${formatDate(insc.fecha_inscripcion)}</td>
                 <td class="action-buttons">
@@ -58,14 +58,14 @@ async function loadInscripciones() {
     }
 }
 
-// Abrir modal para nueva inscripción
+
 async function openModalInscripcion() {
     currentInscripcionId = null;
     document.getElementById('formInscripcion').reset();
     document.getElementById('inscripcionId').value = '';
     document.getElementById('modalInscripcionTitle').textContent = 'Nueva Inscripción';
     
-    // Establecer fecha actual
+
     document.getElementById('inscripcionFecha').valueAsDate = new Date();
     
     await loadAlumnosSelect();
@@ -73,7 +73,7 @@ async function openModalInscripcion() {
     modalInscripcion.show();
 }
 
-// Ver detalles de una inscripción
+
 async function viewInscripcion(id) {
     try {
         const response = await InscripcionesAPI.getById(id);
@@ -81,7 +81,8 @@ async function viewInscripcion(id) {
         const insc = response.data;
         
         const message = `
-            <strong>Alumno:</strong> ${insc.alumno_nombre || 'Alumno #' + insc.alumno_id}<br>
+            <strong>Alumno:</strong> ${insc.alumno_nombre} ${insc.alumno_apellido} <br>
+            <strong>Documento:</strong> ${insc.alumno_documento} <br>
             <strong>Curso:</strong> ${insc.curso_nombre || 'Curso #' + insc.curso_id}<br>
             <strong>Fecha de Inscripción:</strong> ${formatDate(insc.fecha_inscripcion)}
         `;
@@ -93,7 +94,7 @@ async function viewInscripcion(id) {
     }
 }
 
-// Editar inscripción
+
 async function editInscripcion(id) {
     try {
         const response = await InscripcionesAPI.getById(id);
@@ -117,7 +118,7 @@ async function editInscripcion(id) {
     }
 }
 
-// Guardar inscripción (crear o actualizar)
+
 async function saveInscripcion() {
     const form = document.getElementById('formInscripcion');
     
@@ -149,7 +150,7 @@ async function saveInscripcion() {
     }
 }
 
-// Eliminar inscripción
+
 async function deleteInscripcion(id) {
     const confirmed = await showConfirm(
         '¿Está seguro?',
@@ -168,7 +169,7 @@ async function deleteInscripcion(id) {
     }
 }
 
-// Buscar inscripciones
+
 function searchInscripciones() {
     const searchTerm = document.getElementById('searchInscripciones').value.toLowerCase();
     const table = document.getElementById('inscripcionesTable');
@@ -179,3 +180,4 @@ function searchInscripciones() {
         row.style.display = text.includes(searchTerm) ? '' : 'none';
     }
 }
+

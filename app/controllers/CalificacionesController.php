@@ -1,5 +1,5 @@
 <?php
-// app/controllers/CalificacionesController.php
+
 class CalificacionesController extends Controller
 {
   protected $model;
@@ -19,7 +19,7 @@ class CalificacionesController extends Controller
   public function store(Request $request, Response $response)
   {
     $b = $request->body;
-    if (empty($b['alumno_id']) || empty($b['curso_id']) || !isset($b['calificacion'])) {
+    if (empty($b['alumno_id']) || empty($b['curso_id']) || !isset($b['calificacion']) ||  empty($b['profesor_id'])) {
       $response->json(['success' => false, 'message' => 'alumno_id, curso_id y calificacion son obligatorios'], 400);
     }
 
@@ -27,16 +27,18 @@ class CalificacionesController extends Controller
     if ($cal === false || $cal < 1 || $cal > 12) {
       $response->json(['success' => false, 'message' => 'calificacion debe ser número entre 1 y 12'], 400);
     }
-
-    // Verificar alumno y curso existen
     $stmt = $this->db->prepare("SELECT id FROM alumnos WHERE id=:id");
     $stmt->execute(['id' => $b['alumno_id']]);
     if (!$stmt->fetch()) $response->json(['success' => false, 'message' => 'Alumno no existe'], 400);
 
     $stmt = $this->db->prepare("SELECT id FROM cursos WHERE id=:id");
+
     $stmt->execute(['id' => $b['curso_id']]);
     if (!$stmt->fetch()) $response->json(['success' => false, 'message' => 'Curso no existe'], 400);
 
+    $stmt = $this->db->prepare("SELECT id FROM profesores WHERE id=:id");
+    $stmt->execute(['id' => $b['profesor_id']]);
+    if (!$stmt->fetch()) $response->json(['success' => false, 'message' => 'Profesor no existe'], 400);
     try {
       $id = $this->model->create($b);
       $response->json(['success' => true, 'id' => $id], 201);

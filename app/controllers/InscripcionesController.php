@@ -1,5 +1,5 @@
 <?php
-// app/controllers/InscripcionesController.php
+
 class InscripcionesController extends Controller
 {
   protected $model;

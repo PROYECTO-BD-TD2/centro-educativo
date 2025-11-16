@@ -1,18 +1,29 @@
-// calificaciones.js - Módulo para gestión de calificaciones
+
 
 let modalCalificacion;
 let currentCalificacionId = null;
 
-// Inicializar módulo de calificaciones
+
 function initCalificaciones() {
     modalCalificacion = new bootstrap.Modal(document.getElementById('modalCalificacion'));
     
     document.getElementById('btnNuevaCalificacion').addEventListener('click', openModalCalificacion);
     document.getElementById('btnGuardarCalificacion').addEventListener('click', saveCalificacion);
     document.getElementById('searchCalificaciones').addEventListener('keyup', searchCalificaciones);
+    document.getElementById('calificacionAlumno').addEventListener('change', async function() {
+        const alumnoId = this.value;     
+        if (alumnoId) {
+            document.getElementById('calificacionProfesor').value = ''  ;
+            await loadCursosSelectByAlumno(alumnoId);
+        }
+    });
+    document.getElementById('calificacionCurso').addEventListener('change', async function() {
+        const cursoId = this.value; 
+        if (cursoId) {
+            await loadProfesorSelectByCurso(cursoId);
+        }
+    });
 }
-
-// Cargar calificaciones en la tabla
 async function loadCalificaciones() {
     try {
 
@@ -25,7 +36,7 @@ async function loadCalificaciones() {
         if (!calificaciones || calificaciones.length === 0) {
             tbody.innerHTML = `
                 <tr>
-                    <td colspan="6" class="text-center text-muted py-4">
+                    <td colspan="7" class="text-center text-muted py-4">
                         <i class="fas fa-star fa-3x mb-3 d-block" style="opacity: 0.3;"></i>
                         No hay calificaciones registradas
                     </td>
@@ -37,8 +48,9 @@ async function loadCalificaciones() {
         tbody.innerHTML = calificaciones.map(cal => `
             <tr>
                 <td>${cal.id}</td>
-                <td>${cal.alumno_nombre || 'Alumno #' + cal.alumno_id}</td>
-                <td>${cal.curso_nombre || 'Curso #' + cal.curso_id}</td>
+                <td>${cal.alumno_documento }</td>
+                <td>${cal.curso_nombre }</td>
+                <td>${cal.profesor_documento }</td>
                 <td>
                     <span class="badge ${getBadgeClass(cal.calificacion)}">
                         ${cal.calificacion}
@@ -64,7 +76,7 @@ async function loadCalificaciones() {
     }
 }
 
-// Obtener clase de badge según la calificación
+
 function getBadgeClass(nota) {
     if (nota >= 10) return 'bg-success';
     if (nota >= 7) return 'bg-primary';
@@ -72,22 +84,21 @@ function getBadgeClass(nota) {
     return 'bg-danger';
 }
 
-// Abrir modal para nueva calificación
+
 async function openModalCalificacion() {
     currentCalificacionId = null;
     document.getElementById('formCalificacion').reset();
     document.getElementById('calificacionId').value = '';
     document.getElementById('modalCalificacionTitle').textContent = 'Nueva Calificación';
     
-    // Establecer fecha actual
+
     document.getElementById('calificacionFecha').valueAsDate = new Date();
     
     await loadAlumnosSelect();
-    await loadCursosSelect();
     modalCalificacion.show();
 }
 
-// Ver detalles de una calificación
+
 async function viewCalificacion(id) {
     try {
         const response = await CalificacionesAPI.getById(id);
@@ -108,7 +119,7 @@ async function viewCalificacion(id) {
     }
 }
 
-// Editar calificación
+
 async function editCalificacion(id) {
     try {
         const response = await CalificacionesAPI.getById(id);
@@ -116,11 +127,14 @@ async function editCalificacion(id) {
         const cal = response.data;
 
         await loadAlumnosSelect();
-        await loadCursosSelect();
+        await loadCursosSelectByAlumno(cal.alumno_id);
+        await loadProfesorSelectByCurso(cal.curso_id);
         
         currentCalificacionId = cal.id;
         document.getElementById('calificacionId').value = cal.id;
         document.getElementById('calificacionAlumno').value = cal.alumno_id;
+        document.getElementById('calificacionProfesor').value = cal.profesor_id;
+        document.getElementById('calificacionProfesor').disabled =true;
         document.getElementById('calificacionCurso').value = cal.curso_id;
         document.getElementById('calificacionNota').value = cal.calificacion;
         document.getElementById('calificacionFecha').value = cal.fecha_calificacion;
@@ -133,7 +147,7 @@ async function editCalificacion(id) {
     }
 }
 
-// Guardar calificación (crear o actualizar)
+
 async function saveCalificacion() {
     const form = document.getElementById('formCalificacion');
     
@@ -145,11 +159,12 @@ async function saveCalificacion() {
     const calificacion = {
         alumno_id: parseInt(document.getElementById('calificacionAlumno').value),
         curso_id: parseInt(document.getElementById('calificacionCurso').value),
+        profesor_id: parseInt(document.getElementById('calificacionProfesor').value),
         calificacion: parseFloat(document.getElementById('calificacionNota').value),
         fecha_calificacion: document.getElementById('calificacionFecha').value
     };
     
-    // Validar rango de calificación
+
     if (calificacion.calificacion < 1 || calificacion.calificacion > 12) {
         showError('La calificación debe estar entre 1 y 12');
         return;
@@ -172,7 +187,7 @@ async function saveCalificacion() {
     }
 }
 
-// Eliminar calificación
+
 async function deleteCalificacion(id) {
     const confirmed = await showConfirm(
         '¿Está seguro?',
@@ -191,7 +206,7 @@ async function deleteCalificacion(id) {
     }
 }
 
-// Buscar calificaciones
+
 function searchCalificaciones() {
     const searchTerm = document.getElementById('searchCalificaciones').value.toLowerCase();
     const table = document.getElementById('calificacionesTable');
@@ -203,7 +218,7 @@ function searchCalificaciones() {
     }
 }
 
-// Cargar opciones de alumnos en selects
+
 async function loadAlumnosSelect() {
     try {
         const response = await AlumnosAPI.getAll();
@@ -213,9 +228,9 @@ async function loadAlumnosSelect() {
         const selectCalificacion = document.getElementById('calificacionAlumno');
         const selectInscripcion = document.getElementById('inscripcionAlumno');
         
-        const optionHTML = '<option value="">Seleccione un alumno</option>' + 
+        const optionHTML = '<option value="0">Seleccione un alumno</option>' + 
             alumnos.map(alumno => 
-                `<option value="${alumno.id}">${alumno.nombre} ${alumno.apellido}</option>`
+                `<option value="${alumno.id}">${alumno.documento} </option>`
             ).join('');
         
         if (selectCalificacion) selectCalificacion.innerHTML = optionHTML;

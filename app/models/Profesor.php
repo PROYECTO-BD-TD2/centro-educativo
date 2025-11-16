@@ -1,5 +1,5 @@
 <?php
-// app/models/Profesor.php
+
 class Profesor extends Model
 {
   protected $table = 'profesores';
@@ -56,5 +56,15 @@ class Profesor extends Model
     $stmt = $this->db->prepare("DELETE FROM {$this->table} WHERE id = :id");
     $stmt->execute(['id' => $id]);
     return $stmt->rowCount();
+  }
+
+  public function getByCurso(int $cursoId)
+  {
+    $sql = "SELECT p.* FROM {$this->table} p
+            JOIN cursos c ON p.id = c.profesor_id
+            WHERE c.id = :cursoId";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute(['cursoId' => $cursoId]);
+    return $stmt->fetchAll();
   }
 }

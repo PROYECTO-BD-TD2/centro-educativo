@@ -1,5 +1,5 @@
 <?php
-// app/controllers/AlumnosController.php
+
 class AlumnosController extends Controller
 {
   protected $model;

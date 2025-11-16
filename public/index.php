@@ -1,5 +1,5 @@
 <?php
-// public/index.php
+
 declare(strict_types=1);
 
 require_once __DIR__ . '/../app/config.php';
@@ -8,7 +8,7 @@ require_once __DIR__ . '/../app/core/Request.php';
 require_once __DIR__ . '/../app/core/Response.php';
 require_once __DIR__ . '/../app/core/Controller.php';
 require_once __DIR__ . '/../app/core/Model.php';
-// Autocarga básica de controladores y modelos
+
 $logger = new Logger();
 
 spl_autoload_register(function ($class) {
@@ -24,10 +24,10 @@ spl_autoload_register(function ($class) {
 
 $config = require __DIR__ . '/../app/config.php';
 
-// init Router
+
 $router = new Router();
 
-// Rutas de ejemplo (RESTful)
+
 $router->add('GET',  '/alumnos',               'AlumnosController@index');
 $router->add('GET',  '/alumnos/(\d+)',        'AlumnosController@show');
 $router->add('POST', '/alumnos',               'AlumnosController@store');
@@ -41,6 +41,7 @@ $router->add('POST', '/profesores',           'ProfesoresController@store');
 $router->add('PUT',  '/profesores/(\d+)',    'ProfesoresController@update');
 $router->add('DELETE', '/profesores/(\d+)',       'ProfesoresController@delete');
 $router->add('GET', '/profesores/buscar',       'ProfesoresController@buscar');
+$router->add('GET', '/profesores/curso/(\d+)',  'ProfesoresController@getByCurso');
 
 $router->add('GET',  '/cursos',               'CursosController@index');
 $router->add('GET',  '/cursos/(\d+)',        'CursosController@show');
@@ -48,6 +49,8 @@ $router->add('POST', '/cursos',               'CursosController@store');
 $router->add('PUT',  '/cursos/(\d+)',        'CursosController@update');
 $router->add('DELETE', '/cursos/(\d+)',       'CursosController@delete');
 $router->add('GET', '/cursos/buscar',         'CursosController@buscar');
+$router->add('GET',  '/cursos/alumno/(\d+)', 'CursosController@forAlumno');
+$router->add('GET',  '/cursos/profesor/(\d+)', 'CursosController@forProfesor');
 
 $router->add('GET',  '/inscripciones',        'InscripcionesController@index');
 $router->add('GET',  '/inscripciones/(\d+)', 'InscripcionesController@show');
@@ -66,7 +69,7 @@ $router->add('GET', '/calificaciones/buscar',    'CalificacionesController@busca
 $request = new Request();
 $response = new Response();
 
-// Disparar ruta
+
 try {
   $logger->info("Solicitud entrante: [{$request->method}] {$request->path}");
   $router->dispatch($request, $response, $config);
