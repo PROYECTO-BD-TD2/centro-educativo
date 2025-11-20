@@ -13,6 +13,7 @@ class AlumnosController extends Controller
   public function index(Request $request, Response $response)
   {
     $data = $this->model->all();
+    // $this->logger->info("Fetched " . $data . " alumnos");
     $response->json(['success' => true, 'data' => $data]);
   }
 

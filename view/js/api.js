@@ -29,6 +29,7 @@ async function request(endpoint, options = {}) {
         }
         
         const data = await response.json();
+        console.log('Respuesta de la API:', data);
         return data;
     } catch (error) {
         handleError(error);

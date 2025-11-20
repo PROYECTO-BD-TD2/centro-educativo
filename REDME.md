@@ -28,7 +28,8 @@ Es un  sistema web de gestión educativa para administrar estudiantes, profesore
 1.  Puedes clonar el repositorio : 
     https://github.com/PROYECTO-BD-TD2/centro-educativo.git
 
-    Si tienes el proyecto en un archivo .zip, debes descomprimirlo dentro del directorio de tu servidor Apache , por ejemplo: C:/xampp/htdocs/
+    Si tienes el proyecto en un archivo .zip, debes descomprimirlo dentro del directorio de tu servidor Apache , por ejemplo: C:/xampp/htdocs/ 
+
 
 2. Base de datos:
    Puedes importar :  mysql -u root -p centro_educativo < backup.sql
